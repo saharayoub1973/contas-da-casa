@@ -1,0 +1,32 @@
+name: Avisos de vencimento
+
+on:
+  schedule:
+    - cron: "47 10 * * *"   # todo dia por volta das 07:47 (horário de Brasília)
+  workflow_dispatch:
+    inputs:
+      teste:
+        description: "Mandar uma notificação de teste mesmo sem contas vencendo"
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  avisar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install --no-save --no-audit --no-fund firebase-admin@12
+      - run: node .github/avisos.mjs
+        env:
+          FIREBASE_SA: ${{ secrets.FIREBASE_SA }}
+          TESTE: ${{ inputs.teste }}
+          URL_APP: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
+      # Mantém o agendamento ativo (o GitHub pausa agendamentos após 60 dias sem atividade)
+      - uses: gautamkrishnar/keepalive-workflow@v2

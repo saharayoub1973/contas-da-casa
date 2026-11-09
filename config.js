@@ -16,4 +16,4 @@ export const emailsPermitidos = [
 
 // 3) Chave de notificações: Firebase → Configurações do projeto → Cloud Messaging →
 //    Certificados push da Web → Gerar par de chaves → copie a chave e cole aqui
-export const vapidKey = "BCz-Wko_krPI7ogXtCMkY8zsLML4bbRnftnx2tOc4Zafl7RXUCLMkfUSO6g8aDrP1kqcgub5IahV-RiXFw8GPWY";
+export const vapidKey = "COLE_A_CHAVE_AQUI";

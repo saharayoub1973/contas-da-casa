@@ -217,13 +217,45 @@ nav.tabs button[aria-current="page"] svg{stroke-width:2.4}
   </form>
 </div>
 
+<script>
+/* Guardião: mostra erros e oferece destravar, mesmo se o resto do app falhar */
+(function(){
+  function box(msg){
+    var s=document.getElementById("status");if(!s)return;
+    s.hidden=false;s.className="note err";
+    s.innerHTML="";var p=document.createElement("div");p.textContent=msg;s.appendChild(p);
+    var r=document.createElement("div");r.style.cssText="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px";
+    var b1=document.createElement("button");b1.className="btn sm ghost";b1.textContent="Tentar de novo";b1.onclick=function(){location.reload()};
+    var b2=document.createElement("button");b2.className="btn sm danger";b2.textContent="Destravar o app";
+    b2.onclick=async function(){
+      if(!b2.dataset.ok){b2.dataset.ok="1";b2.textContent="Toque de novo para confirmar";return}
+      b2.textContent="Limpando…";
+      try{var regs=await navigator.serviceWorker.getRegistrations();for(var i=0;i<regs.length;i++)await regs[i].unregister()}catch(e){}
+      try{var ks=await caches.keys();for(var j=0;j<ks.length;j++)await caches.delete(ks[j])}catch(e){}
+      try{if(indexedDB.databases){var dbs=await indexedDB.databases();for(var k=0;k<dbs.length;k++)if(dbs[k].name)indexedDB.deleteDatabase(dbs[k].name)}}catch(e){}
+      try{localStorage.clear()}catch(e){}
+      setTimeout(function(){location.reload()},600);
+    };
+    r.appendChild(b1);r.appendChild(b2);s.appendChild(r);
+    var h=document.createElement("div");h.className="hint";h.style.marginTop="8px";h.textContent="Destravar apaga só a cópia guardada neste aparelho (seus dados ficam salvos no Firebase). Depois é preciso entrar com e-mail e senha de novo.";s.appendChild(h);
+  }
+  window.__fatal=function(m){window.__dead=true;box(m)};
+  window.addEventListener("error",function(e){if(!window.__ok)box("Erro ao abrir o app: "+(e.message||"desconhecido"))});
+  window.addEventListener("unhandledrejection",function(e){if(!window.__ok)box("Erro ao abrir o app: "+((e.reason&&(e.reason.message||e.reason.code))||"desconhecido"))});
+  setTimeout(function(){if(!window.__ok&&!window.__dead)box("O app está demorando para carregar. Verifique a internet. Se continuar assim, toque em “Destravar o app”.")},15000);
+})();
+</script>
 <script type="module">
-import * as CFG from "./config.js";
+let CFG={};
+try{CFG=await import("./config.js")}catch(e){window.__fatal("O arquivo config.js tem um erro de digitação ("+e.message+"). Confira aspas, vírgulas e ponto e vírgula.")}
 const {firebaseConfig,emailsPermitidos}=CFG;
 const MSG_URL="https://www.gstatic.com/firebasejs/10.12.2/firebase-messaging.js";
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { initializeFirestore, persistentLocalCache, persistentMultipleTabManager, collection, doc, query, where, onSnapshot, setDoc, deleteDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+let initializeApp,getAuth,onAuthStateChanged,signInWithEmailAndPassword,signOut,initializeFirestore,persistentLocalCache,persistentMultipleTabManager,collection,doc,query,where,onSnapshot,setDoc,deleteDoc,getDocs;
+try{
+  const [A,B,C]=await Promise.all([import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"),import("https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"),import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js")]);
+  ({initializeApp}=A);({getAuth,onAuthStateChanged,signInWithEmailAndPassword,signOut}=B);
+  ({initializeFirestore,persistentLocalCache,persistentMultipleTabManager,collection,doc,query,where,onSnapshot,setDoc,deleteDoc,getDocs}=C);
+}catch(e){window.__fatal("Não consegui carregar o app. Se estiver sem internet, conecte e abra de novo.")}
 
 /* ================= constantes e utilidades ================= */
 const CATS_SAIDA=["Mercado","Moradia","Contas da casa","Transporte","Saúde","Educação","Restaurante/Delivery","Lazer","Vestuário","Assinaturas","Cartão/Dívidas","Presentes","Outros"];
@@ -263,7 +295,7 @@ let config={nomes:["Eu","Esposa"],limites:{},avisoDias:3};
 let fs=null,fbApp=null,started=false,fixasReady=false,pagosReady=false;
 let unY=null,subY=null,unF=null,subF=null;
 
-function setStatus(t,err){const s=$("#status");if(!t){s.hidden=true;return}s.hidden=false;s.textContent=t;s.classList.toggle("err",!!err)}
+function setStatus(t,err){if(window.__dead)return;const s=$("#status");if(!t){s.hidden=true;return}s.hidden=false;s.textContent=t;s.classList.toggle("err",!!err)}
 
 /* ================= Firestore ================= */
 const col=p=>collection(fs,p);
@@ -276,7 +308,7 @@ const docs=s=>s.docs.map(d=>Object.assign({id:d.id},d.data()));
 
 function subAno(){
   if(!fs||subY===ym.y)return;if(unY)unY();subY=ym.y;
-  unY=onSnapshot(query(col("lanc"),where("data",">=",ym.y+"-01-01"),where("data","<",(ym.y+1)+"-01-01")),s=>{lancs=docs(s);setStatus("");render()},snapErr);
+  unY=onSnapshot(query(col("lanc"),where("data",">=",ym.y+"-01-01"),where("data","<",(ym.y+1)+"-01-01")),s=>{lancs=docs(s);window.__ok=true;setStatus("");render()},snapErr);
 }
 function subFatura(){
   if(!fs)return;const k=ymAdd(ymKey()<curYm()?ymKey():curYm(),-1);if(subF===k)return;if(unF)unF();subF=k;
@@ -842,7 +874,7 @@ else{
   fs=initializeFirestore(app,{localCache:persistentLocalCache({tabManager:persistentMultipleTabManager()})});
   const showErr=t=>{const e=$("#lgErr");e.hidden=!t;e.textContent=t||""};
   onAuthStateChanged(auth,u=>{
-    if(!u){$("#login").hidden=false;setStatus("");return}
+    if(!u){window.__ok=true;$("#login").hidden=false;setStatus("");return}
     const ok=!emailsPermitidos||!emailsPermitidos.length||emailsPermitidos.map(x=>x.toLowerCase()).includes((u.email||"").toLowerCase());
     if(!ok){signOut(auth);showErr("Este e-mail não está na lista de acesso.");return}
     window.__email=u.email;$("#login").hidden=true;

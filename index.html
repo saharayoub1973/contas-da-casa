@@ -99,6 +99,8 @@ button.cat .t::after{content:" ›";color:var(--muted)}
 .v.in{color:var(--in)} .v.out{color:var(--out)} .v.sv{color:var(--save)}
 
 .pill{display:inline-block;font-size:.72rem;font-weight:700;padding:2px 9px;border-radius:99px;background:var(--soft);color:var(--ink);white-space:nowrap}
+section.card.alerta{border-color:var(--warn);border-width:1.5px}
+.alerta .m{display:flex;gap:6px;align-items:center}
 .pill.ok{color:var(--in)} .pill.bad{color:var(--out)} .pill.warn{color:var(--warn)}
 
 .yr{display:flex;flex-direction:column;gap:8px}
@@ -216,7 +218,9 @@ nav.tabs button[aria-current="page"] svg{stroke-width:2.4}
 </div>
 
 <script type="module">
-import { firebaseConfig, emailsPermitidos } from "./config.js";
+import * as CFG from "./config.js";
+const {firebaseConfig,emailsPermitidos}=CFG;
+const MSG_URL="https://www.gstatic.com/firebasejs/10.12.2/firebase-messaging.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { initializeFirestore, persistentLocalCache, persistentMultipleTabManager, collection, doc, query, where, onSnapshot, setDoc, deleteDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
@@ -255,8 +259,8 @@ let ym={y:NOW().getFullYear(),m:NOW().getMonth()+1};
 const ymKey=()=>ym.y+"-"+pad(ym.m);
 let tab=ls.get("tab","mes");if(tab==="ajustes")tab="mes";
 let lancs=[],lancsFat=[],lancsMeta=[],fixas=[],cartoes=[],metas=[],pagos={},faturasPg={};
-let config={nomes:["Eu","Esposa"],limites:{}};
-let fs=null,started=false,fixasReady=false,pagosReady=false;
+let config={nomes:["Eu","Esposa"],limites:{},avisoDias:3};
+let fs=null,fbApp=null,started=false,fixasReady=false,pagosReady=false;
 let unY=null,subY=null,unF=null,subF=null;
 
 function setStatus(t,err){const s=$("#status");if(!t){s.hidden=true;return}s.hidden=false;s.textContent=t;s.classList.toggle("err",!!err)}
@@ -275,11 +279,11 @@ function subAno(){
   unY=onSnapshot(query(col("lanc"),where("data",">=",ym.y+"-01-01"),where("data","<",(ym.y+1)+"-01-01")),s=>{lancs=docs(s);setStatus("");render()},snapErr);
 }
 function subFatura(){
-  if(!fs)return;const k=ymKey()<curYm()?ymKey():curYm();if(subF===k)return;if(unF)unF();subF=k;
+  if(!fs)return;const k=ymAdd(ymKey()<curYm()?ymKey():curYm(),-1);if(subF===k)return;if(unF)unF();subF=k;
   unF=onSnapshot(query(col("lanc"),where("fatura",">=",k)),s=>{lancsFat=docs(s);render()},snapErr);
 }
 function startData(){
-  onSnapshot(doc(fs,"config","geral"),s=>{if(s.exists()){const d=s.data();config={nomes:(d.nomes&&d.nomes.length?d.nomes:["Eu","Esposa"]),limites:d.limites||{}}}render()},snapErr);
+  onSnapshot(doc(fs,"config","geral"),s=>{if(s.exists()){const d=s.data();config={nomes:(d.nomes&&d.nomes.length?d.nomes:["Eu","Esposa"]),limites:d.limites||{},avisoDias:+d.avisoDias||3}}render()},snapErr);
   onSnapshot(col("fixas"),s=>{fixas=docs(s).sort((a,b)=>(a.dia||99)-(b.dia||99));fixasReady=fixasReady||!s.metadata.fromCache;autoGen();render()},snapErr);
   onSnapshot(col("cartoes"),s=>{cartoes=docs(s).sort((a,b)=>(a.criadoEm||0)-(b.criadoEm||0));render()},snapErr);
   onSnapshot(col("metas"),s=>{metas=docs(s).sort((a,b)=>(a.criadoEm||0)-(b.criadoEm||0));render()},snapErr);
@@ -345,6 +349,36 @@ function render(){
   const sy=window.scrollY;
   v.innerHTML=tab==="mes"?telaMes():tab==="ano"?telaAno():tab==="cartoes"?telaCartoes():tab==="fixas"?telaFixas():tab==="metas"?telaMetas():telaAjustes();
   window.scrollTo(0,sy);
+  if(tab==="ajustes")pushUI();
+}
+
+/* ================= vencimentos ================= */
+const diffDias=(a,b)=>Math.round((Date.UTC(+a.slice(0,4),+a.slice(5,7)-1,+a.slice(8,10))-Date.UTC(+b.slice(0,4),+b.slice(5,7)-1,+b.slice(8,10)))/864e5);
+function vencimentos(){
+  const T=hoje(),cur=curYm(),dias=+config.avisoDias||3,out=[];
+  for(const k of [ymAdd(cur,-1),cur,ymAdd(cur,1)]){
+    for(const f of fixas){
+      if(f.tipo==="entrada"||!f.dia||f.cartao||(f.desde||"0000-00")>k||fixaStatus(f,k))continue;
+      const due=k+"-"+pad(Math.min(f.dia,lastDay(k))),dd=diffDias(due,T);
+      if(dd<=dias)out.push({nome:f.nome,valor:+f.valor||0,due,dd,tab:"fixas",k});
+    }
+    for(const c of cartoes){
+      if((faturasPg[k]||{})[c.id])continue;
+      const tot=lancsFat.filter(l=>l.cartao===c.id&&l.fatura===k).reduce((a,l)=>a+(+l.valor||0),0);
+      if(!(tot>0))continue;
+      const due=vencDe(k,c),dd=diffDias(due,T);
+      if(dd<=dias)out.push({nome:"Fatura "+c.nome,valor:tot,due,dd,tab:"cartoes",k});
+    }
+  }
+  return out.sort((a,b)=>a.dd-b.dd);
+}
+function quando(dd){return dd<0?(dd===-1?"venceu ontem":"atrasada há "+(-dd)+" dias"):dd===0?"vence hoje":dd===1?"vence amanhã":"vence em "+dd+" dias"}
+function avisosHtml(){
+  const v=vencimentos();if(!v.length)return"";
+  const tot=v.reduce((a,i)=>a+i.valor,0);
+  return `<section class="card alerta"><div class="hrow"><h2>${v.some(i=>i.dd<0)?"Contas atrasadas e a vencer":"Vencendo nos próximos dias"}</h2><small class="num">${fmt(tot)}</small></div>
+  ${v.map(i=>`<button class="item" data-a="irVenc" data-v="${i.tab}" data-k="${i.k}"><span class="d">${esc(i.nome)}</span><span class="m"><span class="pill ${i.dd<0?"bad":i.dd<=1?"warn":""}">${quando(i.dd)}</span> ${dBr(i.due)}</span><span class="v num out">${fmt(i.valor)}</span></button>`).join("")}
+  <div class="hint">Toque para marcar como paga.</div></section>`;
 }
 
 function telaMes(){
@@ -370,6 +404,7 @@ function telaMes(){
   const porQuem={};saidas.forEach(l=>porQuem[l.quem||"—"]=(porQuem[l.quem||"—"]||0)+(+l.valor||0));
   const quemHtml=Object.keys(porQuem).sort((a,b)=>porQuem[b]-porQuem[a]).map(q=>`<button class="cat" data-a="filtro" data-k="quem" data-v="${esc(q)}"><span class="t">${esc(q)}</span><span class="v num">${fmt(porQuem[q])}</span></button>`).join("");
   return `<div class="wrap">
+  ${avisosHtml()}
   <div class="saldo">
     <small>Sobrou no mês</small>
     <div class="big num">${fmt(t.saldo)}</div>
@@ -485,7 +520,15 @@ function telaAjustes(){
   <section class="card"><div class="hrow"><h2>Limite por categoria</h2><small>por mês, opcional</small></div>
     ${CATS_SAIDA.map((c,i)=>`<label class="f" style="flex-direction:row;align-items:center;justify-content:space-between;gap:10px"><span style="font-weight:500;color:var(--ink)">${esc(c)}</span><input class="in num" id="lim${i}" inputmode="decimal" style="max-width:9em;text-align:right" placeholder="—" value="${esc(vIn(config.limites[c]))}"></label>`).join("")}
   </section>
+  <section class="card"><h2>Avisos de vencimento</h2>
+    <label class="f" style="flex-direction:row;align-items:center;justify-content:space-between;gap:10px"><span style="font-weight:500;color:var(--ink)">Avisar com quantos dias de antecedência</span>
+    <select class="in" id="ajDias" style="max-width:6em">${[1,2,3,4,5,7].map(n=>`<option value="${n}"${(+config.avisoDias||3)===n?" selected":""}>${n}</option>`).join("")}</select></label>
+    <div class="hint">Vale para o aviso no app e para as notificações. A notificação chega ${+config.avisoDias||3} ${(+config.avisoDias||3)>1?"dias":"dia"} antes, na véspera, no dia e no dia seguinte se não for paga.</div>
+  </section>
   <button class="btn" data-a="salvarAjustes">Salvar ajustes</button>
+  <section class="card"><div class="hrow"><h2>Notificações neste iPhone</h2><span id="pushPill"></span></div>
+    <div class="hint" id="pushTxt"></div>
+    <button class="btn ghost" data-a="ativarPush" id="pushBtn" hidden>Ativar notificações</button></section>
   <section class="card"><h2>Exportar para Excel</h2>
     <div class="row"><button class="btn ghost" data-a="export" data-v="mes">${esc(ymNome(ymKey()))}</button><button class="btn ghost" data-a="export" data-v="ano">Ano de ${ym.y}</button></div>
     <div class="hint">No iPhone, escolha “Salvar em Arquivos” ou mande pelo WhatsApp/e-mail.</div></section>
@@ -661,7 +704,7 @@ function toggleFatura(id){const k=ymKey(),pg=!!(faturasPg[k]||{})[id];put("fatur
 function salvarAjustes(btn){
   const lim={};CATS_SAIDA.forEach((c,i)=>{const v=parseValor($("#lim"+i).value);if(v>0)lim[c]=v});
   const nomes=[$("#aj0").value.trim()||"Eu",$("#aj1").value.trim()||"Esposa"];
-  put("config","geral",{nomes,limites:lim});btn.textContent="Salvo ✓";setTimeout(()=>{btn.textContent="Salvar ajustes"},1500);
+  put("config","geral",{nomes,limites:lim,avisoDias:+$("#ajDias").value||3});btn.textContent="Salvo ✓";setTimeout(()=>{btn.textContent="Salvar ajustes"},1500);
 }
 function mudouMes(){subAno();subFatura();autoGen()}
 
@@ -745,6 +788,8 @@ document.addEventListener("click",ev=>{
     case "salvarAjustes":salvarAjustes(t);break;
     case "export":exportar(val,t);break;
     case "sair":window.__logout&&window.__logout();break;
+    case "irVenc":{const [y,m]=t.dataset.k.split("-").map(Number);ym={y,m};tab=val;ls.set("tab",tab);mudouMes();render();window.scrollTo(0,0);break}
+    case "ativarPush":ativarPush(t);break;
   }
 });
 document.addEventListener("input",ev=>{if(S&&S.mode==="lanc"&&ev.target.closest("#sheetBody"))hintFatura()});
@@ -754,10 +799,45 @@ addEventListener("online",net);addEventListener("offline",net);net();
 setInterval(()=>{if(fs){autoGen()}},60*60*1000);
 render();
 
+/* ================= notificações ================= */
+const temVapid=()=>!!(CFG.vapidKey&&!String(CFG.vapidKey).startsWith("COLE"));
+const standalone=()=>window.matchMedia("(display-mode: standalone)").matches||navigator.standalone===true;
+function pushSuporte(){return "Notification" in window&&"serviceWorker" in navigator&&"PushManager" in window}
+function pushUI(){
+  const pill=$("#pushPill"),txt=$("#pushTxt"),btn=$("#pushBtn");if(!pill)return;
+  btn.hidden=true;
+  if(!temVapid()){pill.innerHTML=`<span class="pill">não configurado</span>`;txt.textContent="Falta colocar a chave de notificações (vapidKey) no config.js.";return}
+  if(!pushSuporte()){pill.innerHTML=`<span class="pill warn">indisponível</span>`;txt.textContent=standalone()?"Este aparelho não aceita notificações de app web (precisa do iOS 16.4 ou mais novo).":"Abra o app pelo ícone da Tela de Início para ativar as notificações.";return}
+  const p=Notification.permission;
+  if(p==="granted"){pill.innerHTML=`<span class="pill ok">ativadas</span>`;txt.textContent=ls.get("pushOk","")?"Este iPhone vai receber os avisos de vencimento.":"Permissão dada. Registrando este aparelho…";if(!ls.get("pushOk",""))registrarPush().then(pushUI,()=>{});return}
+  if(p==="denied"){pill.innerHTML=`<span class="pill bad">bloqueadas</span>`;txt.textContent="As notificações foram bloqueadas. Para liberar: Ajustes do iPhone → Notificações → Contas → Permitir Notificações.";return}
+  pill.innerHTML=`<span class="pill">desligadas</span>`;txt.textContent="Receba um aviso quando uma conta ou fatura estiver para vencer, mesmo com o app fechado.";btn.hidden=false;
+}
+async function registrarPush(){
+  const M=await import(MSG_URL);
+  if(!(await M.isSupported()))throw new Error("nao-suporta");
+  const reg=await navigator.serviceWorker.ready;
+  const token=await M.getToken(M.getMessaging(fbApp),{vapidKey:CFG.vapidKey,serviceWorkerRegistration:reg});
+  if(!token)throw new Error("sem-token");
+  if(ls.get("pushTok","")!==token){
+    const old=ls.get("pushTok","");if(old)del("push",old);
+    put("push",token,{token,email:window.__email||"",atualizado:Date.now(),aparelho:navigator.userAgent.slice(0,140)});
+    ls.set("pushTok",token);
+  }
+  ls.set("pushOk","1");
+}
+function ativarPush(btn){
+  btn.disabled=true;btn.textContent="Aguarde…";
+  Notification.requestPermission().then(async p=>{
+    if(p==="granted"){try{await registrarPush()}catch(e){$("#pushTxt").textContent="Não consegui registrar este aparelho ("+(e.code||e.message)+"). Tente de novo com internet."}}
+    btn.disabled=false;btn.textContent="Ativar notificações";pushUI();
+  });
+}
+
 /* ================= login ================= */
 if(!firebaseConfig||!firebaseConfig.apiKey||firebaseConfig.apiKey.startsWith("COLE")){setStatus("Falta configurar o arquivo config.js com os dados do Firebase.",true)}
 else{
-  const app=initializeApp(firebaseConfig);
+  const app=fbApp=initializeApp(firebaseConfig);
   const auth=getAuth(app);
   fs=initializeFirestore(app,{localCache:persistentLocalCache({tabManager:persistentMultipleTabManager()})});
   const showErr=t=>{const e=$("#lgErr");e.hidden=!t;e.textContent=t||""};
@@ -766,7 +846,7 @@ else{
     const ok=!emailsPermitidos||!emailsPermitidos.length||emailsPermitidos.map(x=>x.toLowerCase()).includes((u.email||"").toLowerCase());
     if(!ok){signOut(auth);showErr("Este e-mail não está na lista de acesso.");return}
     window.__email=u.email;$("#login").hidden=true;
-    if(!started){started=true;setStatus("Carregando…");startData()}
+    if(!started){started=true;setStatus("Carregando…");startData();if(temVapid()&&pushSuporte()&&Notification.permission==="granted")setTimeout(()=>registrarPush().catch(()=>{}),3000)}
   });
   $("#loginForm").addEventListener("submit",async ev=>{ev.preventDefault();showErr("");
     const b=$("#lgBtn");b.disabled=true;b.textContent="Entrando…";

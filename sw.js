@@ -1,4 +1,4 @@
-const CACHE = "contas-v4";
+const CACHE = "contas-v5";
 const SHELL = ["./", "index.html", "config.js", "manifest.json", "icon-180.png", "icon-192.png", "icon-512.png"];
 const EXTRA = [
   "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js",
@@ -6,7 +6,7 @@ const EXTRA = [
   "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js",
   "https://www.gstatic.com/firebasejs/10.12.2/firebase-messaging.js",
   "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js",
-  "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&display=swap"
+  "https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&family=Patrick+Hand&display=swap"
 ];
 const CDN = ["www.gstatic.com", "fonts.googleapis.com", "fonts.gstatic.com", "cdnjs.cloudflare.com"];
 

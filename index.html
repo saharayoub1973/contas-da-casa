@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Contas da Casa</title>
-<meta name="theme-color" content="#0E6B5C">
+<meta name="theme-color" content="#A9532E">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&family=Patrick+Hand&display=swap">
 <style>
 html{color-scheme:light}
 html{overscroll-behavior-y:none;background:var(--bg)}
@@ -21,19 +21,21 @@ body{margin:0;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none
 input,textarea,select{-webkit-user-select:text;user-select:text}
 [hidden]{display:none!important}
 :root{
-  --bg:#EEF2EF; --surface:#FFFFFF; --ink:#14211D; --muted:#5B6B65; --line:#D9E1DC;
-  --accent:#0E6B5C; --accent-ink:#FFFFFF; --soft:#DCEDE7;
-  --in:#1D8653; --out:#C24E37; --warn:#B7791F; --save:#3D5A99;
-  --display:"Bricolage Grotesque","Avenir Next",system-ui,sans-serif;
-  --body:"Figtree","Segoe UI",system-ui,sans-serif;
-  --bar:#0E6B5C; --bar-ink:#FFFFFF;
+  /* Casa de joão-de-barro: papel creme, telha, folha, tijolo */
+  --bg:#F5EEE3; --surface:#FFFBF5; --ink:#3A2A1F; --muted:#86705E; --line:#E8DBC9;
+  --accent:#3E7C4F; --accent-ink:#FFFBF5; --soft:#F0E5D4;
+  --in:#3E8A52; --out:#C2502F; --warn:#C4861A; --save:#3F6EA8;
+  --display:"Fredoka","Avenir Next Rounded","Arial Rounded MT Bold",system-ui,sans-serif;
+  --body:"Nunito","Avenir Next",system-ui,sans-serif;
+  --hand:"Patrick Hand","Chalkboard SE","Comic Sans MS",cursive;
+  --bar:#A9532E; --bar-ink:#FFF6EA; --telha:#A9532E; --leaf:#3E7C4F; --leaf-ink:#FFFBF5; --dot:rgba(140,90,50,.07); --shadow:#E3D4BF;
 }
 @media (prefers-color-scheme: dark){:root{
-  --bg:#0E1614; --surface:#16211E; --ink:#E5EDE9; --muted:#93A39C; --line:#25332F;
-  --accent:#4DBFA4; --accent-ink:#0B1311; --soft:#1C3530;
-  --in:#5CCB8F; --out:#EF8A72; --warn:#E3B05A; --save:#8FA8E6; --bar:#123F37; color-scheme:dark}}
+  --bg:#1E1712; --surface:#2A211A; --ink:#F2E6D6; --muted:#B39C86; --line:#3B2F26;
+  --accent:#7FBF8A; --accent-ink:#1E1712; --soft:#352A21;
+  --in:#83CC93; --out:#F08A6C; --warn:#E9B75C; --save:#93B2E2; --bar:#6E3820; --telha:#E39A6A; --leaf:#2D5A39; --leaf-ink:#F2E6D6; --dot:rgba(255,220,180,.035); --shadow:#15100C; color-scheme:dark}}
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.45;
+body{background:var(--bg);background-image:radial-gradient(var(--dot) 1.2px,transparent 1.3px);background-size:16px 16px;color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.45;
   padding:0;min-height:100vh}
 .page{max-width:592px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
   padding-block:14px calc(150px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:14px}
@@ -48,31 +50,31 @@ header.appbar{position:sticky;top:0;z-index:8;background:var(--bar);color:var(--
   box-shadow:0 1px 0 rgba(0,0,0,.08)}
 header.appbar .in{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
 .hrow1{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.brand{font-family:var(--display);font-weight:800;font-size:1.15rem;letter-spacing:-.01em}
+.brand{font-family:var(--display);font-weight:700;font-size:1.25rem;letter-spacing:0}
 .sync{font-size:.75rem;opacity:.8;display:flex;align-items:center;gap:6px}
-.sync::before{content:"";width:8px;height:8px;border-radius:50%;background:#7CE3B0}
+.sync::before{content:"";width:8px;height:8px;border-radius:50%;background:#B6E3A1}
 .sync.off::before{background:#F2C36B}
-.mes{display:flex;align-items:center;justify-content:space-between;gap:6px;background:rgba(255,255,255,.12);border-radius:14px;padding:4px}
-.mes b{font-weight:700;text-transform:capitalize;text-align:center;flex:1}
-.ib{border:0;background:rgba(255,255,255,.14);color:var(--bar-ink);min-width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font-size:1.15rem;line-height:1;padding:0 8px}
+.mes{display:flex;align-items:center;justify-content:space-between;gap:6px;background:rgba(255,246,234,.14);border-radius:16px;padding:4px}
+.mes b{font-family:var(--display);font-weight:600;font-size:1.05rem;text-transform:capitalize;text-align:center;flex:1}
+.ib{border:0;background:rgba(255,246,234,.16);color:var(--bar-ink);min-width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font-size:1.15rem;line-height:1;padding:0 8px}
 .ib svg{width:20px;height:20px}
 
 .note{font-size:.85rem;color:var(--muted);background:var(--surface);border:1px dashed var(--line);border-radius:12px;padding:10px 12px}
 .note.err{color:var(--out);border-color:var(--out)}
 
-.saldo{background:var(--accent);color:var(--accent-ink);border-radius:20px;padding:18px 18px 16px;display:flex;flex-direction:column;gap:10px}
+.saldo{background:var(--leaf);background-image:linear-gradient(135deg,rgba(255,255,255,.08),transparent 60%);color:var(--leaf-ink);border-radius:22px;padding:18px 18px 16px;display:flex;flex-direction:column;gap:10px;box-shadow:0 3px 0 var(--shadow)}
 .saldo small{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;opacity:.85}
-.saldo .big{font-family:var(--display);font-weight:800;font-size:clamp(2.1rem,9vw,2.8rem);line-height:1;letter-spacing:-.02em}
+.saldo .big{font-family:var(--display);font-weight:700;font-size:clamp(2.1rem,9vw,2.8rem);line-height:1;letter-spacing:0}
 .saldo .msg{font-weight:600;font-size:.92rem}
-.bar{height:8px;border-radius:99px;background:color-mix(in srgb,var(--accent-ink) 22%,transparent);overflow:hidden}
-.bar i{display:block;height:100%;background:var(--accent-ink);border-radius:99px}
+.bar{height:8px;border-radius:99px;background:color-mix(in srgb,var(--leaf-ink) 22%,transparent);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--leaf-ink);border-radius:99px}
 .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .trio div{display:flex;flex-direction:column;gap:2px;min-width:0}
 .trio span{font-size:.72rem;opacity:.85}
 .trio strong{font-size:.98rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
-section.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:10px;min-width:0}
-h2{font-family:var(--display);font-weight:600;font-size:1.05rem;margin:0;text-wrap:balance}
+section.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0;box-shadow:0 3px 0 var(--shadow)}
+h2{font-family:var(--display);font-weight:600;font-size:1.12rem;margin:0;text-wrap:balance;letter-spacing:.005em}
 h3{font-size:.95rem;margin:0}
 .hrow{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
 .hrow small{color:var(--muted);font-size:.8rem}
@@ -101,6 +103,21 @@ button.cat .t::after{content:" ›";color:var(--muted)}
 .pill{display:inline-block;font-size:.72rem;font-weight:700;padding:2px 9px;border-radius:99px;background:var(--soft);color:var(--ink);white-space:nowrap}
 section.card.alerta{border-color:var(--warn);border-width:1.5px}
 .alerta .m{display:flex;gap:6px;align-items:center}
+.mascote .masc-row{display:grid;grid-template-columns:112px 1fr;gap:12px;align-items:center}
+.masc-art svg{width:100%;height:auto;display:block}
+.balao{position:relative;background:var(--soft);border-radius:16px;padding:10px 12px;font-family:var(--hand);font-size:1.12rem;line-height:1.25;display:flex;flex-direction:column;gap:2px;min-width:0}
+.balao b{font-family:var(--body);font-size:.7rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--telha)}
+.balao::before{content:"";position:absolute;left:-8px;top:50%;margin-top:-8px;border:8px solid transparent;border-right-color:var(--soft);border-left:0}
+.masc-seq{align-items:center;border-top:1px dashed var(--line);padding-top:10px}
+.dica{display:flex;flex-direction:column;gap:8px}
+.dica+.dica{border-top:1px dashed var(--line);padding-top:12px}
+.dica p{margin:0;font-family:var(--hand);font-size:1.15rem;line-height:1.3}
+.dica-acoes{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.lnk.armed{color:var(--out);font-weight:700}
+.eyebrow{font-size:.72rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--telha)}
+.ninho-card svg{width:100%;max-width:280px;display:block;margin:0 auto}
+.nivel-nome{font-family:var(--display);font-weight:700;font-size:1.7rem;text-align:center;line-height:1.1}
+.celebra .masc-art{max-width:240px;margin:0 auto;position:relative}
 .seq .seq-n{display:flex;align-items:baseline;gap:6px;font-weight:600}
 .seq .seq-n b{font-family:var(--display);font-size:1.5rem;font-weight:800}
 .seq .seq-n.big b{font-size:2.6rem}
@@ -162,7 +179,7 @@ section.card.alerta{border-color:var(--warn);border-width:1.5px}
 .lnk{background:none;border:0;color:var(--muted);font-size:.82rem;text-decoration:underline;padding:6px 4px}
 
 .cc-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
-.cc-total{font-family:var(--display);font-weight:800;font-size:1.7rem;line-height:1.1}
+.cc-total{font-family:var(--display);font-weight:700;font-size:1.7rem;line-height:1.1}
 .mini{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .mini div{background:var(--bg);border-radius:10px;padding:8px;display:flex;flex-direction:column;min-width:0}
 .mini span{font-size:.72rem;color:var(--muted);text-transform:capitalize}
@@ -174,7 +191,7 @@ section.card.alerta{border-color:var(--warn);border-width:1.5px}
 label.f{display:flex;flex-direction:column;gap:4px;font-size:.8rem;color:var(--muted);font-weight:600;min-width:0}
 input.in,select.in{border:1px solid var(--line);background:var(--bg);border-radius:10px;padding:10px 12px;font-size:16px;width:100%;min-width:0}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.btn{border:0;background:var(--accent);color:var(--accent-ink);border-radius:12px;padding:12px 16px;font-weight:700}
+.btn{border:0;background:var(--accent);color:var(--accent-ink);border-radius:14px;padding:12px 16px;font-weight:800;box-shadow:0 2px 0 rgba(0,0,0,.12)}
 .btn.ghost{background:var(--soft);color:var(--ink)}
 .btn.sm{padding:8px 12px;font-size:.88rem;border-radius:10px}
 .btn.danger{background:none;color:var(--out);border:1px solid var(--out)}
@@ -188,10 +205,10 @@ nav.tabs{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border
 nav.tabs .in{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);gap:0}
 nav.tabs button{background:none;border:0;padding:6px 0 4px;border-radius:12px;font-size:.7rem;font-weight:600;color:var(--muted);min-width:0;display:flex;flex-direction:column;align-items:center;gap:3px}
 nav.tabs svg{width:23px;height:23px}
-nav.tabs button[aria-current="page"]{color:var(--accent)}
+nav.tabs button[aria-current="page"]{color:var(--telha)}
 nav.tabs button[aria-current="page"] svg{stroke-width:2.4}
 .fab{position:fixed;right:max(16px,calc(env(safe-area-inset-right,0px) + 16px));bottom:calc(76px + env(safe-area-inset-bottom,0px));z-index:6;
-  border:0;background:var(--ink);color:var(--bg);border-radius:99px;padding:14px 20px;font-weight:700;font-size:1rem;box-shadow:0 6px 18px rgba(0,0,0,.18)}
+  border:0;background:var(--bar);color:var(--bar-ink);border-radius:99px;padding:14px 22px;font-family:var(--display);font-weight:600;font-size:1.05rem;box-shadow:0 4px 0 rgba(0,0,0,.18),0 8px 18px rgba(0,0,0,.14)}
 
 .scrim{position:fixed;inset:0;background:rgba(10,20,17,.45);z-index:20}
 .sheet{position:fixed;left:0;right:0;bottom:0;z-index:21;background:var(--surface);border-radius:20px 20px 0 0;max-height:92%;overflow-y:auto;-webkit-overflow-scrolling:touch;
@@ -203,10 +220,10 @@ nav.tabs button[aria-current="page"] svg{stroke-width:2.4}
 .seg button.on[data-v="entrada"]{background:var(--in);color:#fff}
 .valor{display:flex;align-items:baseline;gap:6px;border-bottom:2px solid var(--line);padding:4px 0}
 .valor span{font-family:var(--display);font-weight:600;font-size:1.4rem;color:var(--muted)}
-.valor input{border:0;background:none;font-family:var(--display);font-weight:800;font-size:2.2rem;width:100%;min-width:0;padding:0;outline:none}
+.valor input{border:0;background:none;font-family:var(--display);font-weight:700;font-size:2.2rem;width:100%;min-width:0;padding:0;outline:none}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips button{border:1px solid var(--line);background:var(--bg);border-radius:99px;padding:7px 12px;font-size:.88rem;font-weight:500}
-.chips button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chips button{border:1px solid var(--line);background:var(--bg);border-radius:99px;padding:7px 12px;font-size:.88rem;font-weight:600}
+.chips button.on{background:var(--bar);color:var(--bar-ink);border-color:var(--bar)}
 .row{display:flex;gap:8px;flex-wrap:wrap}
 .row>.btn{flex:1}
 .login{position:fixed;inset:0;z-index:30;background:var(--bar);display:grid;place-items:center;
@@ -247,8 +264,9 @@ nav.tabs button[aria-current="page"] svg{stroke-width:2.4}
 
 <div class="login" id="login" hidden>
   <form class="card" id="loginForm" novalidate>
-    <div class="brand" style="font-size:1.6rem">Contas da Casa</div>
-    <p style="margin:0;color:var(--muted)">Entre com o e-mail e a senha cadastrados no Firebase. Depois disso o app funciona mesmo sem internet.</p>
+    <div id="loginArt" class="masc-art" style="max-width:220px;margin:0 auto"></div>
+    <div class="brand" style="font-size:1.7rem;text-align:center">Contas da Casa</div>
+    <p style="margin:0;color:var(--muted);text-align:center">Seu João e Dona Maria estão esperando vocês. Entre com o e-mail e a senha cadastrados no Firebase.</p>
     <label class="f">E-mail<input class="in" id="lgEmail" type="email" autocomplete="username" inputmode="email"></label>
     <label class="f">Senha<input class="in" id="lgSenha" type="password" autocomplete="current-password"></label>
     <div id="lgErr" class="note err" hidden></div>
@@ -362,7 +380,7 @@ function startData(){
   onSnapshot(query(col("dias"),where("d",">=",dAdd(hoje(),-370))),s=>{dias={};s.docs.forEach(d=>dias[d.id]=d.data());if(!s.metadata.fromCache)jr.dias=true;jogoTick()},snapErr);
   onSnapshot(col("meses"),s=>{meses={};s.docs.forEach(d=>meses[d.id]=d.data());if(!s.metadata.fromCache)jr.meses=true;jogoTick()},snapErr);
   onSnapshot(col("desafios"),s=>{desafios=docs(s).sort((a,b)=>(b.criadoEm||0)-(a.criadoEm||0));if(!s.metadata.fromCache)jr.desafios=true;jogoTick()},snapErr);
-  onSnapshot(col("jogo"),s=>{const m={};s.docs.forEach(d=>m[d.id]=d.data());conquistas=Object.assign({},m.conquistas||{});recordes=Object.assign({},m.recordes||{});if(!s.metadata.fromCache)jr.jogo=true;jogoTick()},snapErr);
+  onSnapshot(col("jogo"),s=>{const m={};s.docs.forEach(d=>m[d.id]=d.data());conquistas=Object.assign({},m.conquistas||{});recordes=Object.assign({},m.recordes||{});dicasCfg={off:Object.assign({},(m.dicas||{}).off||{}),adiadas:Object.assign({},(m.dicas||{}).adiadas||{})};if(!s.metadata.fromCache)jr.jogo=true;jogoTick()},snapErr);
   onSnapshot(query(col("lanc"),where("data",">=",dAdd(hoje(),-100))),s=>{lancsRec=docs(s);if(!s.metadata.fromCache)jr.rec=true;jogoTick()},snapErr);
   onSnapshot(col("pagos"),s=>{pagos={};s.docs.forEach(d=>pagos[d.id]=d.data());pagosReady=pagosReady||!s.metadata.fromCache;autoGen();render()},snapErr);
   onSnapshot(col("faturas"),s=>{faturasPg={};s.docs.forEach(d=>faturasPg[d.id]=d.data());render()},snapErr);
@@ -589,10 +607,10 @@ function seqHtml(compacto){
     ${s.hojeOk?`<span class="pill ok">hoje registrado</span>`:`<button class="btn sm" data-a="naoGastei">Hoje não gastei</button>`}</div>
     ${s.hojeOk?"":`<div class="hint">${s.n?"Lance um gasto ou toque no botão para não perder a sequência.":"Registre algo todo dia, mesmo que seja “não gastei”, para começar uma sequência."}</div>`}</section>`;
   const h=hoje(),dots=[];for(let i=13;i>=0;i--){const d=dAdd(h,-i);dots.push(`<i class="${dias[d]?"on":""}${d===h?" hj":""}" title="${dBr(d)}"></i>`)}
-  return `<section class="card seq"><div class="hrow"><h2>Sequência</h2><small class="num">recorde: ${rec} ${rec===1?"dia":"dias"}</small></div>
-    <div class="seq-n big"><span class="fogo">🔥</span><b class="num">${s.n}</b> ${s.n===1?"dia seguido":"dias seguidos"}</div>
+  return `<section class="card seq"><div class="hrow"><h2>Tijolinhos</h2><small class="num">recorde: ${rec} ${rec===1?"dia":"dias"}</small></div>
+    <div class="seq-n big"><span class="fogo">🧱</span><b class="num">${s.n}</b> ${s.n===1?"dia seguido":"dias seguidos"}</div>
     <div class="dots" aria-label="Últimos 14 dias">${dots.join("")}</div>
-    ${s.hojeOk?`<div class="hint">Hoje já está registrado. Volte amanhã!</div>`:`<button class="btn" data-a="naoGastei">Hoje não gastei</button><div class="hint">Qualquer lançamento conta. Se não gastou nada, toque no botão.</div>`}</section>`;
+    ${s.hojeOk?`<div class="hint">O tijolinho de hoje já foi colocado. Volte amanhã!</div>`:`<button class="btn" data-a="naoGastei">Hoje não gastei</button><div class="hint">Cada dia registrado é um tijolinho na casa. Qualquer lançamento conta; se não gastou nada, toque no botão.</div>`}</section>`;
 }
 function telaDesafios(){
   const n=Object.keys(conquistas).filter(id=>CONQ.some(c=>c[0]===id)).length,nv=nivel(n);
@@ -605,9 +623,11 @@ function telaDesafios(){
       <div class="prog"><i style="width:${a.pct}%;background:${(d.tipo==="limite_cat"||d.tipo==="total")&&a.pct>85?"var(--warn)":"var(--accent)"}"></i></div>
       <div class="hint num">${esc(a.txt)}</div></section>`};
   return `<div class="wrap">
-    <div class="saldo"><small>Nível da casa</small><div class="big">${esc(nv.nome)}</div>
-      <div class="bar"><i style="width:${nv.prox?Math.min(100,(n-NIVEIS[nv.i][0])/(nv.prox[0]-NIVEIS[nv.i][0])*100):100}%"></i></div>
-      <div class="msg">${n} de ${CONQ.length} conquistas${nv.prox?` · faltam ${nv.prox[0]-n} para “${nv.prox[1]}”`:" · nível máximo!"}</div></div>
+    <section class="card nivel"><div class="hrow"><span class="eyebrow">Nível ${nv.i+1} da casa</span><small class="num">${n} de ${CONQ.length} conquistas</small></div>
+      <div class="ninho-card">${ninhoSVG(nv.i+1)}</div>
+      <div class="nivel-nome">${esc(nv.nome)}</div>
+      <div class="prog"><i style="width:${nv.prox?Math.min(100,(n-NIVEIS[nv.i][0])/(nv.prox[0]-NIVEIS[nv.i][0])*100):100}%;background:var(--telha)"></i></div>
+      <div class="hint">${nv.prox?`Faltam ${nv.prox[0]-n} ${nv.prox[0]-n===1?"conquista":"conquistas"} para “${nv.prox[1]}”. A cada nível, a casa ganha mais tijolinhos.`:"Casa completa, com portinha e tudo!"}</div></section>
     ${seqHtml(false)}
     <section class="card"><div class="hrow"><h2>Desafios</h2><small>${ativos.length?ativos.length+" em andamento":""}</small></div>
       ${ativos.length?"":`<div class="empty">Escolha um desafio curto, como uma semana sem delivery ou o mercado abaixo de um valor. O app acompanha sozinho com os lançamentos.</div>`}
@@ -617,6 +637,165 @@ function telaDesafios(){
     <section class="card"><div class="hrow"><h2>Conquistas</h2><small class="num">${n}/${CONQ.length}</small></div>
       <div class="badges">${CONQ.map(([id,ic,nome,desc])=>`<div class="badge${conquistas[id]?"":" lock"}"><span class="ic">${ic}</span><b>${esc(nome)}</b><small>${esc(desc)}</small>${conquistas[id]?`<small class="num">${dBr(conquistas[id])}/${conquistas[id].slice(2,4)}</small>`:""}</div>`).join("")}</div></section>
   </div>`;
+}
+
+/* ================= Seu João e Dona Maria (desenhos) ================= */
+const MC={ruf:"#B8693A",rufD:"#8E4A26",wing:"#9B562E",belly:"#F3DEC2",throat:"#FBF1E3",beak:"#5B3B25",leg:"#7A5A45",ink:"#2A1A10"};
+function passaro(expr,acc,flip,tx,ty,body){
+  const g=[],hy=expr==="dormindo"?44:40,ex=79,ey=hy-2;
+  g.push(`<path d="M34 78 L8 58 Q6 54 11 53 L42 66 Z" fill="${MC.rufD}"/>`);
+  g.push(`<g stroke="${MC.leg}" stroke-width="3.2" stroke-linecap="round" fill="none"><path d="M54 96 L51 110 M51 110 L45 112 M51 110 L56 112"/><path d="M68 96 L70 110 M70 110 L64 112 M70 110 L76 112"/></g>`);
+  g.push(`<ellipse cx="60" cy="72" rx="31" ry="27" fill="${body}"/><ellipse cx="66" cy="80" rx="20" ry="17" fill="${MC.belly}"/>`);
+  if(expr==="comemorando")g.push(`<path d="M48 66 Q30 40 22 30 Q40 36 58 60 Z" fill="${MC.wing}"/>`);
+  else g.push(`<ellipse cx="50" cy="72" rx="19" ry="13" transform="rotate(-18 50 72)" fill="${MC.wing}"/><path d="M36 74 Q48 80 62 76" stroke="${MC.rufD}" stroke-width="1.6" fill="none" opacity=".6"/>`);
+  g.push(`<circle cx="72" cy="${hy}" r="21" fill="${body}"/><ellipse cx="78" cy="${hy+12}" rx="11" ry="7" fill="${MC.throat}"/>`);
+  g.push(expr==="preocupado"?`<path d="M70 ${hy-12} Q78 ${hy-9} 86 ${hy-14}" stroke="#EBCB9F" stroke-width="3.5" stroke-linecap="round" fill="none"/>`:`<path d="M69 ${hy-9} Q78 ${hy-16} 87 ${hy-10}" stroke="#EBCB9F" stroke-width="3.5" stroke-linecap="round" fill="none"/>`);
+  if(expr==="feliz"||expr==="comemorando")g.push(`<path d="M${ex-5} ${ey+1} Q${ex} ${ey-6} ${ex+5} ${ey+1}" stroke="${MC.ink}" stroke-width="2.8" stroke-linecap="round" fill="none"/><ellipse cx="${ex-3}" cy="${ey+9}" rx="4.5" ry="2.8" fill="#E98A6B" opacity=".55"/>`);
+  else if(expr==="dormindo")g.push(`<path d="M${ex-5} ${ey} Q${ex} ${ey+4} ${ex+5} ${ey}" stroke="${MC.ink}" stroke-width="2.6" stroke-linecap="round" fill="none"/>`);
+  else g.push(`<circle cx="${ex}" cy="${ey}" r="5.5" fill="#fff"/><circle cx="${ex+1}" cy="${ey+.5}" r="3.4" fill="${MC.ink}"/><circle cx="${ex+2.2}" cy="${ey-1}" r="1.1" fill="#fff"/>`);
+  g.push(expr==="comemorando"?`<path d="M89 ${hy-2} Q99 ${hy-4} 106 ${hy-1} L90 ${hy+2} Z" fill="${MC.beak}"/><path d="M90 ${hy+3} L104 ${hy+6} Q96 ${hy+9} 89 ${hy+6} Z" fill="${MC.beak}"/>`:`<path d="M89 ${hy-1} Q99 ${hy-1} 106 ${hy+3} Q97 ${hy+5} 89 ${hy+5} Z" fill="${MC.beak}"/>`);
+  if(acc==="chapeu")g.push(`<g transform="rotate(-8 70 ${hy-18})"><ellipse cx="70" cy="${hy-16}" rx="22" ry="5" fill="#E2BE73"/><path d="M58 ${hy-16} Q59 ${hy-33} 70 ${hy-33} Q81 ${hy-33} 82 ${hy-16} Z" fill="#EBCB84"/><rect x="58.5" y="${hy-21}" width="23" height="4" fill="#9C3D2C"/></g>`);
+  if(acc==="flor"){const cx=62,cy=hy-17;for(let a=0;a<5;a++){const r=(a*72-90)*Math.PI/180;g.push(`<circle cx="${(cx+6*Math.cos(r)).toFixed(1)}" cy="${(cy+6*Math.sin(r)).toFixed(1)}" r="4.6" fill="#F08AA4"/>`)}g.push(`<circle cx="${cx}" cy="${cy}" r="3.4" fill="#F7C948"/>`)}
+  if(expr==="preocupado")g.push(`<path d="M96 ${hy-22} Q92 ${hy-14} 96 ${hy-12} Q100 ${hy-14} 96 ${hy-22} Z" fill="#7FB7E6"/>`);
+  return `<g transform="translate(${tx},${ty})${flip?" translate(120,0) scale(-1,1)":""}">${g.join("")}</g>`;
+}
+function casalSVG(expr){
+  let x="";
+  if(expr==="comemorando"){const cols=["#F7C948","#4DBFA4","#F08AA4","#8FA8E6","#E98A6B"];let seed=7;const rnd=()=>{seed=(seed*9301+49297)%233280;return seed/233280};
+    for(let i=0;i<20;i++){const a=(rnd()*240+10).toFixed(0),b=(rnd()*60+4).toFixed(0),r=(rnd()*80-40).toFixed(0);x+=`<rect x="${a}" y="${b}" width="6" height="10" rx="1.5" fill="${cols[i%5]}" transform="rotate(${r} ${a} ${b})"/>`}}
+  if(expr==="feliz")x+=`<path d="M130 22 C126 14 116 16 118 25 C119 30 130 36 130 36 C130 36 141 30 142 25 C144 16 134 14 130 22 Z" fill="#F08AA4"/>`;
+  if(expr==="dormindo"){x+=`<path d="M232 14 A14 14 0 1 0 246 34 A11 11 0 1 1 232 14 Z" fill="#F7C948"/>`;for(const [a,b,f] of [[94,40,14],[103,29,10],[150,40,14],[141,29,10]])x+=`<text x="${a}" y="${b}" font-family="Arial" font-weight="700" font-size="${f}" fill="#8A9BB0">z</text>`}
+  return `<svg viewBox="0 0 260 150" role="img" aria-label="Seu João e Dona Maria, ${expr}" xmlns="http://www.w3.org/2000/svg"><ellipse cx="130" cy="138" rx="112" ry="6" fill="#000" opacity=".07"/>${x}${passaro(expr,"chapeu",false,0,22,MC.ruf)}${passaro(expr,"flor",true,140,22,"#C2774A")}</svg>`;
+}
+function ninhoSVG(stage){
+  const W=60,H=96,cx=110,base=150,o=[];
+  o.push(`<path d="M6 156 Q90 146 214 152" stroke="#6B4A2F" stroke-width="9" stroke-linecap="round" fill="none"/><path d="M170 151 Q186 136 200 132" stroke="#6B4A2F" stroke-width="5" stroke-linecap="round" fill="none"/><ellipse cx="203" cy="128" rx="9" ry="5" fill="#6FAE5A" transform="rotate(-30 203 128)"/><ellipse cx="40" cy="146" rx="9" ry="5" fill="#6FAE5A" transform="rotate(20 40 146)"/>`);
+  if(stage<=1){for(const [a,b,c,d] of [[78,148,118,141],[90,150,140,145],[100,146,132,139],[84,144,108,150]])o.push(`<path d="M${a} ${b} L${c} ${d}" stroke="#9A7350" stroke-width="3" stroke-linecap="round"/>`);o.push(`<ellipse cx="110" cy="146" rx="9" ry="3.5" fill="#B57B4C"/>`)}
+  else{const rows={2:2,3:5,4:9,5:9}[stage],bh=10.5,cols=["#B57B4C","#A86E41","#C08656","#9E663C"];let k=0;
+    for(let r=0;r<rows;r++){const y=base-(r+1)*bh,t=(r+.5)*bh/H;if(t>=1)break;const half=W*Math.sqrt(Math.max(0,1-t*t));
+      if(half<9){o.push(`<ellipse cx="${cx}" cy="${y+5}" rx="10" ry="6" fill="${cols[0]}"/>`);break}
+      const n=Math.max(1,Math.round(2*half/17)),bw=2*half/n,off=r%2?bw/2:0,xs=[];let xx=cx-half;
+      if(off)xs.push([xx,off]);xx+=off;while(xx+bw<=cx+half+.5){xs.push([xx,bw]);xx+=bw}if(cx+half-xx>2)xs.push([xx,cx+half-xx]);
+      for(const [bx,w] of xs)o.push(`<rect x="${(bx+1).toFixed(1)}" y="${(y+1).toFixed(1)}" width="${Math.max(2,w-2).toFixed(1)}" height="${bh-2}" rx="3.5" fill="${cols[k++%4]}"/>`)}
+    if(stage===5){o.push(`<path d="M${cx-11} ${base-2} L${cx-11} ${base-28} Q${cx-11} ${base-42} ${cx} ${base-42} Q${cx+11} ${base-42} ${cx+11} ${base-28} L${cx+11} ${base-2} Z" fill="#3A2416"/>`);
+      for(const [fx,fy,c] of [[52,140,"#F08AA4"],[62,143,"#F7C948"],[162,141,"#F08AA4"]])o.push(`<circle cx="${fx}" cy="${fy}" r="4.2" fill="${c}"/><circle cx="${fx}" cy="${fy}" r="1.6" fill="#fff"/>`);
+      for(const [sx,sy] of [[40,70],[184,62],[170,30]])o.push(`<path d="M${sx} ${sy-7} L${sx+2} ${sy-2} L${sx+7} ${sy} L${sx+2} ${sy+2} L${sx} ${sy+7} L${sx-2} ${sy+2} L${sx-7} ${sy} L${sx-2} ${sy-2} Z" fill="#F7C948"/>`)}}
+  const planta=stage<5?`<path d="M${cx-W} ${base} A${W} ${H} 0 0 1 ${cx+W} ${base}" fill="none" stroke="#B57B4C" stroke-width="2" stroke-dasharray="5 6" opacity=".45"/>`:"";
+  return `<svg viewBox="0 22 220 142" role="img" aria-label="Casa no nível ${stage}" xmlns="http://www.w3.org/2000/svg">${planta}${o.join("")}</svg>`;
+}
+const QUEM_FALA=()=>(+hoje().slice(8))%2?"Seu João":"Dona Maria";
+function estadoMascote(){
+  const seq=sequencia(),v=vencimentos(),h=NOW().getHours(),hojeConq=Object.values(conquistas).some(d=>d===hoje());
+  const urg=v.filter(i=>i.dd<=1);
+  if(urg.length){const i=urg[0];return["preocupado",`Ô, ${i.nome} ${quando(i.dd)} (${fmt(i.valor)}), viu? Depois de pagar, é só marcar.`]}
+  if(hojeConq)return["comemorando","Conquista nova hoje! Dá uma olhada na aba Desafios. 🎉"];
+  const d=dicasAtuais.find(x=>x.id==="proj");
+  if(d)return["preocupado","No ritmo atual, o mês fecha no vermelho. Bora segurar um pouquinho?"];
+  if(seq.hojeOk&&h>=21)return["dormindo","Tudo anotado por hoje. Boa noite!"];
+  if(seq.hojeOk)return["feliz",`Mais um tijolinho! 🧱 ${seq.n} ${seq.n===1?"dia":"dias seguidos"}. Tá ficando bonita essa casa.`];
+  if(seq.n>=2)return["feliz",`Falta o tijolinho de hoje! 🧱 ${seq.n} dias seguidos em jogo.`];
+  return["feliz",h<12?"Bom dia! Lançou algum gasto hoje? Se não gastou nada, é só tocar em “Hoje não gastei”.":"E aí, teve gasto hoje? Se não teve, toca em “Hoje não gastei”."];
+}
+function mascoteHtml(){
+  const [ex,fala]=estadoMascote(),seq=sequencia();
+  return `<section class="card mascote">
+    <div class="masc-row"><div class="masc-art">${casalSVG(ex)}</div>
+    <div class="balao"><b>${QUEM_FALA()}</b><span>${esc(fala)}</span></div></div>
+    <div class="hrow masc-seq"><span class="seq-n"><span class="fogo">🧱</span><b class="num">${seq.n}</b> ${seq.n===1?"dia seguido":"dias seguidos"}</span>
+    ${seq.hojeOk?`<span class="pill ok">hoje registrado</span>`:`<button class="btn sm" data-a="naoGastei">Hoje não gastei</button>`}</div>
+  </section>`;
+}
+
+/* ================= dicas de economia ================= */
+let dicasCfg={off:{},adiadas:{}},dicasAtuais=[];
+const normD=s=>String(s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/\(\d+\/\d+\)/,"").replace(/\s+/g," ").trim();
+const r10=v=>Math.max(10,Math.round(v/10)*10);
+function calcDicas(){
+  const out=[],h=hoje(),cur=curYm(),dia=+h.slice(8),nd=lastDay(cur);
+  const all=todosLancs(),doM=k=>all.filter(l=>(l.data||"").slice(0,7)===k);
+  const mes=doM(cur),saidas=mes.filter(l=>l.tipo==="saida");
+  const fech=[1,2,3].map(n=>ymAdd(cur,-n)),ant=all.filter(l=>l.tipo==="saida"&&fech.includes((l.data||"").slice(0,7)));
+  const nAnt=new Set(ant.map(l=>l.data.slice(0,7))).size;
+  const variavel=l=>!l.fixa&&!(l.parcela&&l.parcela.i>1);
+  const tM=totais(mes);
+  const abertasE=fixas.filter(f=>f.tipo==="entrada"&&!fixaStatus(f,cur)).reduce((a,f)=>a+(+f.valor||0),0);
+  const abertasS=fixas.filter(f=>f.tipo!=="entrada"&&!fixaStatus(f,cur)).reduce((a,f)=>a+(+f.valor||0),0);
+  const renda=tM.e+abertasE;
+  // 1. projeção do mês
+  const prevDescs=new Set(all.filter(l=>l.tipo==="saida"&&(l.data||"").slice(0,7)===ymAdd(cur,-1)).map(l=>normD(l.desc)).filter(Boolean));
+  const ritmo=l=>variavel(l)&&!l.parcela&&!["Moradia","Contas da casa","Cartão/Dívidas","Educação","Saúde"].includes(l.cat)&&!(renda>0&&+l.valor>=renda*.1)&&!(normD(l.desc)&&prevDescs.has(normD(l.desc)));
+  if(dia>=7&&renda>0){
+    const varS=saidas.filter(ritmo).reduce((a,l)=>a+(+l.valor||0),0),fixoS=tM.s-varS;
+    const proj=fixoS+abertasS+varS/dia*nd;
+    if(proj>renda)out.push({id:"proj",prio:100,txt:`No ritmo atual, os gastos do mês chegam a ${fmt0(proj)}: ${fmt0(proj-renda)} acima do que entra.`,acao:{t:"desafio",lbl:"Criar desafio",v:{tipo:"total",valor:vIn(r10(renda*.95)),per:"mes"}}});
+    else if(renda-proj>renda*.1&&dia<=25)out.push({id:"sobra",prio:20,txt:`No ritmo atual, sobram uns ${fmt0(renda-proj)} no fim do mês. Que tal já guardar uma parte nas metas?`,acao:{t:"metas",lbl:"Ir para Metas"}});
+  }
+  // 2. categoria acima da média
+  if(nAnt>=1){
+    const cats=[...new Set(saidas.map(l=>l.cat))].filter(c=>!["Moradia","Contas da casa","Cartão/Dívidas"].includes(c));
+    const lista=[];
+    for(const c of cats){const avg=ant.filter(l=>l.cat===c&&variavel(l)).reduce((a,l)=>a+(+l.valor||0),0)/nAnt;
+      const doCat=saidas.filter(l=>l.cat===c&&variavel(l)),at=doCat.reduce((a,l)=>a+(+l.valor||0),0);
+      if(avg<50)continue;
+      if(at>avg*1.2)lista.push({c,avg,at,pct:Math.round((at/avg-1)*100),ja:true});
+      else if(dia>=7&&dia<=22&&doCat.length>=3&&at/dia*nd>avg*1.3)lista.push({c,avg,at,pct:Math.round((at/dia*nd/avg-1)*100),ja:false})}
+    lista.sort((a,b)=>(b.at-b.avg)-(a.at-a.avg)).slice(0,2).forEach(x=>out.push({id:"cat-"+x.c,prio:x.ja?80:60,
+      txt:x.ja?`${x.c} já passou ${x.pct}% da média de um mês inteiro (${fmt0(x.at)} contra ${fmt0(x.avg)}).`:`No ritmo atual, ${x.c} fecha o mês uns ${x.pct}% acima da média (${fmt0(x.avg)}).`,
+      itens:saidas.filter(l=>l.cat===x.c),acao:{t:"desafio",lbl:"Segurar até o fim do mês",v:{tipo:"limite_cat",cat:x.c,valor:vIn(r10(x.avg/nd*(nd-dia+1))),per:"mes"}}}));
+  }
+  // 3. gastinhos
+  const peq=saidas.filter(l=>variavel(l)&&+l.valor<30);
+  if(peq.length>=8)out.push({id:"gastinhos",prio:50,txt:`${peq.length} gastos abaixo de R$ 30 este mês somaram ${fmt0(peq.reduce((a,l)=>a+(+l.valor||0),0))}. Os gastinhos somam!`,itens:peq});
+  // 4. fim de semana
+  const ini60=dAdd(h,-60),lz=all.filter(l=>l.tipo==="saida"&&l.data>=ini60&&["Lazer","Restaurante/Delivery"].includes(l.cat));
+  const totLz=lz.reduce((a,l)=>a+(+l.valor||0),0),fds=lz.filter(l=>[5,6,0].includes(new Date(l.data+"T12:00").getDay()));
+  const totF=fds.reduce((a,l)=>a+(+l.valor||0),0);
+  if(totLz>=150&&totF/totLz>=.55)out.push({id:"fds",prio:35,txt:`${Math.round(totF/totLz*100)}% do que vocês gastaram com lazer e delivery nos últimos 2 meses foi de sexta a domingo. Combinar o fim de semana antes ajuda.`,itens:fds});
+  // 5. assinatura não cadastrada
+  const ini4=ymAdd(cur,-3)+"-01",grupos={};
+  all.filter(l=>l.tipo==="saida"&&l.data>=ini4&&variavel(l)&&!l.parcela&&normD(l.desc).length>=3).forEach(l=>{(grupos[normD(l.desc)]=grupos[normD(l.desc)]||[]).push(l)});
+  const nomesFixas=fixas.map(f=>normD(f.nome));
+  for(const [k,arr] of Object.entries(grupos)){
+    const ms=new Set(arr.map(l=>l.data.slice(0,7)));if(ms.size<2||nomesFixas.includes(k))continue;
+    if(!ms.has(cur)&&!ms.has(ymAdd(cur,-1)))continue;
+    const vs=arr.map(l=>+l.valor).sort((a,b)=>a-b),med=vs[Math.floor(vs.length/2)];
+    if(!vs.every(v=>Math.abs(v-med)<=med*.15)||ms.size<arr.length*0.6)continue;
+    const ult=arr.sort((a,b)=>b.data.localeCompare(a.data))[0];
+    out.push({id:"ass-"+k,prio:45,txt:`“${ult.desc}” aparece todo mês (${fmt(med)}). Se for assinatura, cadastre como conta fixa, ou veja se ainda vale a pena.`,itens:arr,
+      acao:{t:"fixa",lbl:"Cadastrar como fixa",v:{tipo:"saida",nome:ult.desc,valor:vIn(med),dia:String(+ult.data.slice(8)),cat:ult.cat,quem:"Casal",cartao:ult.cartao||"",auto:!!ult.cartao}}});
+    if(out.filter(d=>d.id.startsWith("ass-")).length>=2)break;
+  }
+  // 6. conta fixa que subiu
+  for(const f of fixas.filter(f=>f.tipo!=="entrada")){
+    const l=mes.find(x=>x.fixa===f.id);if(!l)continue;
+    const prev=ant.filter(x=>x.fixa===f.id);if(!prev.length)continue;
+    const avg=prev.reduce((a,x)=>a+(+x.valor||0),0)/prev.length;
+    if(+l.valor>avg*1.2&&+l.valor-avg>=15)out.push({id:"fixa-"+f.id,prio:55,txt:`${f.nome} veio ${Math.round((l.valor/avg-1)*100)}% acima da média (${fmt(+l.valor)} contra ${fmt(avg)}). Vale dar uma olhada.`,itens:[l,...prev]});
+  }
+  // 7. parcelas comprometendo o próximo mês
+  const nk=ymAdd(cur,1),comp=lancsFat.filter(l=>l.fatura===nk&&l.parcela).reduce((a,l)=>a+(+l.valor||0),0);
+  const ks=Object.keys(meses).filter(k=>k<cur).sort().slice(-3),rendaRef=fixas.filter(f=>f.tipo==="entrada").reduce((a,f)=>a+(+f.valor||0),0)||(ks.length?ks.reduce((a,k)=>a+meses[k].e,0)/ks.length:0);
+  if(rendaRef>0&&comp/rendaRef>=.25)out.push({id:"parcelas",prio:70,txt:`${Math.round(comp/rendaRef*100)}% da renda de ${MESES[+nk.slice(5)-1]} já está comprometida com parcelas no cartão (${fmt0(comp)}). Melhor evitar novas parcelas por enquanto.`,acao:{t:"cartoes",lbl:"Ver cartões"}});
+  // 8. efeito salário
+  const sal=mes.filter(l=>l.tipo==="entrada"&&l.cat==="Salário").sort((a,b)=>a.data.localeCompare(b.data))[0];
+  if(sal){const sd=+sal.data.slice(8);const vv=saidas.filter(variavel),tv=vv.reduce((a,l)=>a+(+l.valor||0),0);
+    const jan=vv.filter(l=>{const d=+l.data.slice(8);return d>=sd&&d<=sd+4}).reduce((a,l)=>a+(+l.valor||0),0);
+    if(dia-sd>=10&&tv>=300&&vv.length>=8&&jan/tv>=.5)out.push({id:"salario",prio:30,txt:`${Math.round(jan/tv*100)}% dos gastos do mês saíram nos 5 dias depois do salário. Separar logo o que vai para as contas e para as metas ajuda o dinheiro a durar.`,acao:{t:"metas",lbl:"Ir para Metas"}})}
+  // 9. reserva de emergência
+  const media=ks.length?ks.reduce((a,k)=>a+meses[k].s,0)/ks.length:0,guard=metas.reduce((a,m)=>a+saldoMeta(m.id),0);
+  if(ks.length>=2&&media>0&&guard<media)out.push({id:"reserva",prio:25,txt:`Que tal uma reserva de emergência? O ideal é juntar de 3 a 6 meses de gastos: algo entre ${fmt0(media*3)} e ${fmt0(media*6)}.`,acao:{t:"meta",lbl:"Criar a reserva",v:{nome:"Reserva de emergência",alvo:vIn(r10(media*3)),prazo:""}}});
+  // filtros
+  return out.filter(d=>{const tipo=d.id.split("-")[0];if((dicasCfg.off||{})[tipo]||(dicasCfg.off||{})[d.id])return false;const ad=(dicasCfg.adiadas||{})[d.id+"@"+cur];return !(ad&&ad>=h)})
+    .sort((a,b)=>b.prio-a.prio).slice(0,3);
+}
+function dicasHtml(){
+  if(!dicasAtuais.length)return"";
+  return `<section class="card dicas"><div class="hrow"><h2>Dicas da casa</h2><small>${dicasAtuais.length} ${dicasAtuais.length>1?"dicas":"dica"}</small></div>
+  ${dicasAtuais.map((d,i)=>`<div class="dica"><p>${esc(d.txt)}</p><div class="dica-acoes">
+    ${d.acao?`<button class="btn sm" data-a="dicaAcao" data-v="${i}">${esc(d.acao.lbl)}</button>`:""}
+    ${d.itens&&d.itens.length?`<button class="btn sm ghost" data-a="dicaVer" data-v="${i}">Ver gastos</button>`:""}
+    <button class="lnk" data-a="dicaAdiar" data-v="${i}">já sei</button><button class="lnk" data-a="dicaOff" data-v="${i}">não mostrar mais</button></div></div>`).join("")}
+  </section>`;
 }
 
 /* ================= telas ================= */
@@ -662,6 +841,7 @@ function avisosHtml(){
 
 function telaMes(){
   const k=ymKey(),arr=doMes(ym.y,ym.m),t=totais(arr),cur=curYm(),ehAtual=k===cur;
+  if(ehAtual)dicasAtuais=calcDicas();
   const pct=t.e>0?Math.min(100,Math.round(t.s/t.e*100)):0;
   const diasRest=ehAtual?lastDay(k)-NOW().getDate()+1:0;
   const abertasS=fixas.filter(f=>f.tipo!=="entrada"&&!fixaStatus(f,k)).reduce((a,f)=>a+(+f.valor||0),0);
@@ -683,10 +863,10 @@ function telaMes(){
   const porQuem={};saidas.forEach(l=>porQuem[l.quem||"—"]=(porQuem[l.quem||"—"]||0)+(+l.valor||0));
   const quemHtml=Object.keys(porQuem).sort((a,b)=>porQuem[b]-porQuem[a]).map(q=>`<button class="cat" data-a="filtro" data-k="quem" data-v="${esc(q)}"><span class="t">${esc(q)}</span><span class="v num">${fmt(porQuem[q])}</span></button>`).join("");
   return `<div class="wrap">
-  ${ehAtual?avisosHtml():""}
+  ${ehAtual?mascoteHtml():""}
   ${k<cur?resumoHtml(k):""}
   ${ehAtual&&NOW().getDate()<=7&&meses[ymAdd(k,-1)]?`<button class="card resumo-link" data-a="verResumo"><span>Resumo de ${MESES[+ymAdd(k,-1).slice(5)-1]}: nota <b class="num">${notaTxt(notaMes(ymAdd(k,-1)).nota)}</b></span><span>ver ›</span></button>`:""}
-  ${ehAtual?seqHtml(true):""}
+  ${ehAtual?avisosHtml():""}
   <div class="saldo">
     <small>Sobrou no mês</small>
     <div class="big num">${fmt(t.saldo)}</div>
@@ -694,6 +874,7 @@ function telaMes(){
     <div class="msg">${esc(msg)}</div>
     <div class="trio num"><div><span>Entrou</span><strong>${fmt(t.e)}</strong></div><div><span>Saiu</span><strong>${fmt(t.s)}</strong></div><div><span>Guardou</span><strong>${fmt(t.g)}</strong></div></div>
   </div>
+  ${ehAtual?dicasHtml():""}
   <section class="card"><div class="hrow"><h2>Para onde foi o dinheiro</h2><small class="num">${t.e?Math.round(t.s/t.e*100)+"% da renda":""}</small></div>${catsHtml}</section>
   ${quemHtml?`<section class="card"><div class="hrow"><h2>Quem gastou</h2><small>toque para ver</small></div>${quemHtml}</section>`:""}
   <section class="card"><div class="hrow"><h2>Lançamentos</h2><small>${arr.length} no mês</small></div>${listaPorDia(arr)||`<div class="empty">Toque em “+ Lançar” para registrar o primeiro gasto ou o salário.</div>`}</section>
@@ -833,7 +1014,7 @@ function drawSheet(){
   const b=$("#sheetBody"),v=S.v;
   if(S.mode==="list"){
     const tot=S.items.reduce((a,l)=>a+(+l.valor||0),0);
-    b.innerHTML=head(esc(S.title))+`<div class="hrow"><small>${S.items.length} lançamento${S.items.length!==1?"s":""} em ${esc(ymNome(ymKey()))}</small><strong class="num">${fmt(tot)}</strong></div><div>${listaPorDia(S.items)}</div>`;return}
+    b.innerHTML=head(esc(S.title))+`<div class="hrow"><small>${S.items.length} lançamento${S.items.length!==1?"s":""}${S.semMes?"":" em "+esc(ymNome(ymKey()))}</small><strong class="num">${fmt(tot)}</strong></div><div>${listaPorDia(S.items)}</div>`;return}
   if(S.mode==="lanc"){
     const meta=v.tipo==="meta",cats=v.tipo==="entrada"?CATS_ENTRADA:CATS_SAIDA;
     if(!meta&&!cats.includes(v.cat))v.cat=cats[0];
@@ -893,7 +1074,7 @@ function drawSheet(){
     errBox+`<div class="row"><button class="btn" data-a="salvarDesafio">Começar desafio</button></div>`;return}
   if(S.mode==="conq"){
     const it=S.ids.map(id=>CONQ.find(c=>c[0]===id)).filter(Boolean);
-    b.innerHTML=`<div class="celebra"><div class="confete" aria-hidden="true">${"<i></i>".repeat(18)}</div>
+    b.innerHTML=`<div class="celebra"><div class="confete" aria-hidden="true">${"<i></i>".repeat(18)}</div><div class="masc-art">${casalSVG("comemorando")}</div>
       <div class="hint" style="text-align:center">${it.length>1?it.length+" conquistas desbloqueadas":"Conquista desbloqueada"}</div>
       ${it.map(([id,ic,nome,desc])=>`<div class="cel-item"><span class="ic">${ic}</span><div><b>${esc(nome)}</b><small>${esc(desc)}</small></div></div>`).join("")}
       <button class="btn" data-a="fechar">Boa!</button></div>`;return}
@@ -1084,6 +1265,15 @@ document.addEventListener("click",ev=>{
     case "mov":openSheet("mov",{meta:id,mov:val,valor:"",quem:ls.get("quem",config.nomes[0]),data:hoje()});break;
     case "salvarMov":salvarMov();break;
     case "naoGastei":marcarDia(true);render();jogoTick();break;
+    case "dicaVer":{const d=dicasAtuais[+val];if(d)openSheet("list",{},{title:"Gastos desta dica",items:d.itens||[],semMes:true});break}
+    case "dicaAcao":{const d=dicasAtuais[+val];if(!d||!d.acao)break;const ac=d.acao;
+      if(ac.t==="desafio"){const fimMes=curYm()+"-"+pad(lastDay(curYm()));openSheet("desafio",Object.assign({tipo:"total",cat:"Mercado",valor:"",inicio:hoje(),fim:fimMes,per:"mes",sug:false},ac.v,{inicio:hoje(),fim:fimMes}))}
+      else if(ac.t==="fixa")openSheet("fixa",Object.assign({},ac.v));
+      else if(ac.t==="meta")openSheet("meta",Object.assign({},ac.v));
+      else{tab=ac.t;ls.set("tab",tab);render();window.scrollTo(0,0)}
+      break}
+    case "dicaAdiar":{const d=dicasAtuais[+val];if(!d)break;const key=d.id+"@"+curYm(),ate=dAdd(hoje(),6);dicasCfg.adiadas[key]=ate;put("jogo","dicas",{adiadas:{[key]:ate}},true);render();break}
+    case "dicaOff":{const d=dicasAtuais[+val];if(!d)break;if(!t.classList.contains("armed")){t.classList.add("armed");t.textContent="toque de novo";break}dicasCfg.off[d.id]=true;put("jogo","dicas",{off:{[d.id]:true}},true);render();break}
     case "verResumo":ym.m--;if(ym.m<1){ym.m=12;ym.y--}mudouMes();render();window.scrollTo(0,0);break;
     case "novoDesafio":{
       openSheet("desafio",{tipo:"sem_cat",cat:"Restaurante/Delivery",valor:"",inicio:hoje(),fim:dAdd(hoje(),6),per:"7",sug:false});break}
@@ -1110,6 +1300,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&S)closeSheet()});
 function net(){const s=$("#sync");s.textContent=navigator.onLine?"sincronizado":"offline · salva e envia depois";s.classList.toggle("off",!navigator.onLine)}
 addEventListener("online",net);addEventListener("offline",net);net();
 setInterval(()=>{if(fs){autoGen()}},60*60*1000);
+{const la=$("#loginArt");if(la)la.innerHTML=casalSVG("feliz")}
 render();
 
 /* ================= notificações ================= */

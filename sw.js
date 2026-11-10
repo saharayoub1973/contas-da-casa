@@ -1,4 +1,4 @@
-const CACHE = "contas-v7";
+const CACHE = "contas-v8";
 const SHELL = ["./", "index.html", "config.js", "manifest.json", "icon-180.png", "icon-192.png", "icon-512.png"];
 const EXTRA = [
   "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js",

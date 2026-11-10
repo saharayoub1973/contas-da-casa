@@ -36,8 +36,8 @@ if (MODO === "noite") {
     let n = 0, d = dAdd(hoje, -1);
     while (dias.has(d)) { n++; d = dAdd(d, -1); }
     if (n >= 2) {
-      title = `🔥 Sequência de ${n} dias em risco`;
-      linhas.push("Ainda não tem nada registrado hoje. Lance um gasto ou toque em “Hoje não gastei” antes da meia-noite.");
+      title = `🧱 Sequência de ${n} dias em risco`;
+      linhas.push("Dona Maria lembrou: ainda não tem nenhum tijolinho hoje. Lance um gasto ou toque em “Hoje não gastei” antes da meia-noite.");
     }
   }
 } else {
@@ -61,7 +61,7 @@ if (MODO === "noite") {
     const ls = await db.collection("lanc").where("data", ">=", pk + "-01").where("data", "<", cur + "-01").get().then(docs);
     let e = 0, s = 0, g = 0;
     for (const l of ls) { const v = +l.valor || 0; if (l.tipo === "entrada") e += v; else if (l.tipo === "meta") g += l.mov === "retirar" ? -v : v; else s += v; }
-    if (ls.length) linhas.push(`Fechamos ${MESES[+pk.slice(5) - 1]}: ${e - s - g >= 0 ? "sobrou " + brl(e - s - g) : "faltou " + brl(s + g - e)}. Abra o app para ver a nota do mês.`);
+    if (ls.length) linhas.push(`Fechamos ${MESES[+pk.slice(5) - 1]}: ${e - s - g >= 0 ? "sobrou " + brl(e - s - g) : "faltou " + brl(s + g - e)}. Vem ver a nota do mês!`);
   }
 
   // Contas e faturas
@@ -88,13 +88,13 @@ if (MODO === "noite") {
   // Último dia de desafio
   desafios.filter(d => !d.status && d.fim === hoje).forEach(d => linhas.push(`⚡ Último dia do desafio “${d.titulo}”.`));
 
-  title = alvo.length ? (alvo.length === 1 ? "Conta vencendo" : alvo.length + " contas vencendo") : linhas.length ? "Contas da Casa" : "";
+  title = alvo.length ? (alvo.length === 1 ? "Seu João avisa: conta vencendo" : `Seu João avisa: ${alvo.length} contas vencendo`) : linhas.length ? "Seu João e Dona Maria" : "";
 }
 
 if (!linhas.length) {
   if (!TESTE) { console.log(`${hoje} (${MODO}): nada para avisar.`); process.exit(0); }
   title = "Contas da Casa";
-  linhas = ["Teste: as notificações estão funcionando ✅"];
+  linhas = ["Teste: Seu João e Dona Maria estão de olho nas contas ✅"];
 }
 const body = linhas.join("\n");
 

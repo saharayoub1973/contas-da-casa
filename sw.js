@@ -1,9 +1,10 @@
-const CACHE = "contas-v3";
+const CACHE = "contas-v4";
 const SHELL = ["./", "index.html", "config.js", "manifest.json", "icon-180.png", "icon-192.png", "icon-512.png"];
 const EXTRA = [
   "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js",
   "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js",
   "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js",
+  "https://www.gstatic.com/firebasejs/10.12.2/firebase-messaging.js",
   "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js",
   "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&display=swap"
 ];
@@ -56,5 +57,27 @@ self.addEventListener("fetch", e => {
       if (r && (r.ok || r.type === "opaque")) c.put(req, r.clone());
       return r;
     } catch (err) { return Response.error(); }
+  })());
+});
+
+// Notificações (enviadas pelo robô do GitHub via Firebase Cloud Messaging)
+self.addEventListener("push", e => {
+  let j = {};
+  try { j = e.data ? e.data.json() : {}; } catch (err) { j = { notification: { body: e.data ? e.data.text() : "" } }; }
+  const n = j.notification || {}, d = j.data || {};
+  const title = n.title || d.title || "Contas da Casa";
+  const body = n.body || d.body || "";
+  e.waitUntil(self.registration.showNotification(title, {
+    body, icon: "icon-192.png", badge: "icon-192.png", tag: d.tag || "vencimentos", renotify: true,
+    data: { url: d.url || self.registration.scope }
+  }));
+});
+self.addEventListener("notificationclick", e => {
+  e.notification.close();
+  const url = (e.notification.data && e.notification.data.url) || self.registration.scope;
+  e.waitUntil((async () => {
+    const all = await self.clients.matchAll({ type: "window", includeUncontrolled: true });
+    for (const c of all) { if ("focus" in c) { try { await c.navigate(url); } catch (err) {} return c.focus(); } }
+    return self.clients.openWindow(url);
   })());
 });

@@ -2,7 +2,8 @@ name: Avisos de vencimento
 
 on:
   schedule:
-    - cron: "47 10 * * *"   # todo dia por volta das 07:47 (horário de Brasília)
+    - cron: "47 10 * * *"   # manhã: vencimentos (por volta das 07:47 em Brasília)
+    - cron: "17 23 * * *"   # noite: lembrete da sequência (por volta das 20:17 em Brasília)
   workflow_dispatch:
     inputs:
       teste:

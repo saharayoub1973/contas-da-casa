@@ -118,6 +118,59 @@ section.card.alerta{border-color:var(--warn);border-width:1.5px}
 .ninho-card svg{width:100%;max-width:280px;display:block;margin:0 auto}
 .nivel-nome{font-family:var(--display);font-weight:700;font-size:1.7rem;text-align:center;line-height:1.1}
 .celebra .masc-art{max-width:240px;margin:0 auto;position:relative}
+.masc-art{background:none;border:0;padding:0;display:block;min-width:0}
+button.masc-art{cursor:pointer}
+@media (prefers-reduced-motion:no-preference){
+ .vivo .ave{animation:bob 3.4s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 100%}
+ .vivo g>g.ave{animation-delay:0s}
+ .vivo svg>g:last-of-type>.ave{animation-delay:-1.7s}
+ .vivo .olho{animation:pisca 4.8s infinite;transform-box:fill-box;transform-origin:center}
+ .pula .ave{animation:pulo .55s ease-out 2}
+ .reacao{transition:transform .25s ease,opacity .25s ease}
+}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-2.5px) rotate(-1deg)}}
+@keyframes pisca{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+@keyframes pulo{0%,100%{transform:translateY(0)}40%{transform:translateY(-12px)}}
+.reacao{position:fixed;left:max(12px,env(safe-area-inset-left,0px));right:max(12px,env(safe-area-inset-right,0px));bottom:calc(140px + env(safe-area-inset-bottom,0px));z-index:15;max-width:520px;margin:0 auto;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:8px 12px 8px 8px;display:grid;grid-template-columns:84px 1fr;gap:8px;align-items:center;box-shadow:0 6px 0 var(--shadow),0 10px 24px rgba(0,0,0,.12);transform:translateY(16px);opacity:0;pointer-events:none}
+.reacao.show{transform:none;opacity:1}
+.reac-art svg{width:84px;height:auto;display:block}
+.reacao .balao::before{display:none}
+.sug{display:flex;flex-direction:column;gap:10px}
+.sug-premio{display:flex;align-items:center;gap:10px;background:var(--bg);border-radius:14px;padding:8px 12px}
+.sug-premio div{display:flex;flex-direction:column}
+.sug-premio small{color:var(--muted)}
+.sug-premio.sm{padding:6px 10px}
+.por{display:flex;align-items:center;gap:10px;background:var(--bg);border-radius:12px;padding:9px 12px;font-size:.92rem}
+.por .av{width:28px;height:28px;border-radius:50%;background:var(--bar);color:var(--bar-ink);display:grid;place-items:center;font-weight:800;font-size:.85rem;flex:0 0 auto}
+.conv-art{max-width:200px;margin:0 auto}
+.chat{display:flex;flex-direction:column;gap:8px;max-height:40vh;overflow-y:auto}
+.msg{max-width:86%;border-radius:18px;padding:9px 12px}
+.msg.ele{align-self:flex-start;background:var(--soft);border-bottom-left-radius:6px;display:flex;flex-direction:column;gap:2px;font-family:var(--hand);font-size:1.1rem;line-height:1.25}
+.msg.ele b{font-family:var(--body);font-size:.7rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--telha)}
+.msg.eu{align-self:flex-end;background:var(--bar);color:var(--bar-ink);border-bottom-right-radius:6px;font-weight:700;font-size:.92rem}
+.perguntas{display:flex;flex-wrap:wrap;gap:6px}
+.perguntas .btn{flex:1 1 45%}
+.comodos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;background:var(--soft);border-radius:14px;padding:4px}
+.comodo{border:0;background:none;border-radius:10px;padding:8px 2px;font-weight:800;font-size:.82rem;color:var(--ink);display:flex;flex-direction:column;align-items:center;gap:1px}
+.comodo small{font-weight:600;font-size:.66rem;color:var(--muted)}
+.comodo.on{background:var(--surface);color:var(--telha);box-shadow:0 2px 0 var(--shadow)}
+.comodo:disabled{opacity:.6}
+.sala-art{position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--line);box-shadow:0 3px 0 var(--shadow)}
+.sala-art svg{width:100%;height:auto;display:block}
+.sala-masc{position:absolute;left:31%;top:50%;width:34%;height:30%;background:none;border:0;border-radius:20px}
+.itens{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.item-c{display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center;background:var(--bg);border:2px solid var(--line);border-radius:14px;padding:8px 4px;min-width:0;color:var(--ink)}
+.item-c svg{max-width:100%;height:auto;max-height:34px;width:auto}
+.item-c b{font-size:.72rem;line-height:1.15}
+.item-c small{font-size:.64rem;color:var(--muted);line-height:1.2}
+.item-c.on{border-color:var(--accent)}
+.item-c.lock{border-style:dashed;color:var(--muted)}
+.item-c.lock svg{opacity:.45;filter:grayscale(.6)}
+.ops{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.op{display:flex;flex-direction:column;align-items:center;gap:6px;background:var(--bg);border:2px solid var(--line);border-radius:16px;padding:12px 6px;color:var(--ink);text-align:center}
+.op:active{border-color:var(--accent)}
+.op small{color:var(--muted);font-size:.72rem}
+.op svg{max-width:100%;height:auto;max-height:52px;width:auto}
 .seq .seq-n{display:flex;align-items:baseline;gap:6px;font-weight:600}
 .seq .seq-n b{font-family:var(--display);font-size:1.5rem;font-weight:800}
 .seq .seq-n.big b{font-size:2.6rem}
@@ -256,9 +309,10 @@ nav.tabs button[aria-current="page"] svg{stroke-width:2.4}
   <button data-a="tab" data-v="cartoes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg><span>Cartões</span></button>
   <button data-a="tab" data-v="fixas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14M7 22l-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg><span>Fixas</span></button>
   <button data-a="tab" data-v="metas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg><span>Metas</span></button>
-  <button data-a="tab" data-v="desafios"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M17 6h3v1a3 3 0 0 1-3 3M7 6H4v1a3 3 0 0 0 3 3"/></svg><span>Desafios</span></button>
+  <button data-a="tab" data-v="desafios"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg><span>Casa</span></button>
 </div></nav>
 
+<div class="reacao" id="reacao" hidden aria-live="polite"></div>
 <div class="scrim" id="scrim" hidden data-a="fechar"></div>
 <div class="sheet" id="sheet" hidden role="dialog" aria-modal="true"><div class="in2" id="sheetBody"></div></div>
 
@@ -380,7 +434,7 @@ function startData(){
   onSnapshot(query(col("dias"),where("d",">=",dAdd(hoje(),-370))),s=>{dias={};s.docs.forEach(d=>dias[d.id]=d.data());if(!s.metadata.fromCache)jr.dias=true;jogoTick()},snapErr);
   onSnapshot(col("meses"),s=>{meses={};s.docs.forEach(d=>meses[d.id]=d.data());if(!s.metadata.fromCache)jr.meses=true;jogoTick()},snapErr);
   onSnapshot(col("desafios"),s=>{desafios=docs(s).sort((a,b)=>(b.criadoEm||0)-(a.criadoEm||0));if(!s.metadata.fromCache)jr.desafios=true;jogoTick()},snapErr);
-  onSnapshot(col("jogo"),s=>{const m={};s.docs.forEach(d=>m[d.id]=d.data());conquistas=Object.assign({},m.conquistas||{});recordes=Object.assign({},m.recordes||{});dicasCfg={off:Object.assign({},(m.dicas||{}).off||{}),adiadas:Object.assign({},(m.dicas||{}).adiadas||{})};if(!s.metadata.fromCache)jr.jogo=true;jogoTick()},snapErr);
+  onSnapshot(col("jogo"),s=>{const m={};s.docs.forEach(d=>m[d.id]=d.data());conquistas=Object.assign({},m.conquistas||{});recordes=Object.assign({},m.recordes||{});dicasCfg={off:Object.assign({},(m.dicas||{}).off||{}),adiadas:Object.assign({},(m.dicas||{}).adiadas||{})};casa={itens:Object.assign({},(m.casa||{}).itens||{}),premiados:Object.assign({},(m.casa||{}).premiados||{})};if(!s.metadata.fromCache)jr.jogo=true;jogoTick()},snapErr);
   onSnapshot(query(col("lanc"),where("data",">=",dAdd(hoje(),-100))),s=>{lancsRec=docs(s);if(!s.metadata.fromCache)jr.rec=true;jogoTick()},snapErr);
   onSnapshot(col("pagos"),s=>{pagos={};s.docs.forEach(d=>pagos[d.id]=d.data());pagosReady=pagosReady||!s.metadata.fromCache;autoGen();render()},snapErr);
   onSnapshot(col("faturas"),s=>{faturasPg={};s.docs.forEach(d=>faturasPg[d.id]=d.data());render()},snapErr);
@@ -538,6 +592,10 @@ const CONQ=[
  ["desafio10","🏆","Dez desafios","Cumpriu 10 desafios.",c=>c.desOk>=10],
  ["fatura6","💳","Fatura em dia","Pagou 6 faturas até o vencimento.",c=>c.fatEmDia>=6],
  ["pontual","✅","Pontual","Pagou 10 contas fixas até o vencimento.",c=>c.contasEmDia>=10],
+ ["enfeite1","🪴","Primeiro enfeite","Ganhou o primeiro enfeite da casa.",c=>c.enfeites>=1],
+ ["enfeite5","🛋️","Casa aconchegante","Juntou 5 enfeites na casa.",c=>c.enfeites>=5],
+ ["sala10","🏠","Sala completa","Ganhou todos os enfeites comuns da sala.",c=>c.salaCompleta],
+ ["epoca","🎉","Clima de festa","Ganhou um enfeite de época.",c=>c.epoca],
 ];
 const NIVEIS=[[0,"Começando"],[3,"Organizados"],[6,"Disciplinados"],[10,"Mestres das finanças"],[14,"Lendas da casa"]];
 function nivel(n){let i=0;NIVEIS.forEach((x,j)=>{if(n>=x[0])i=j});return{i,nome:NIVEIS[i][1],prox:NIVEIS[i+1]||null}}
@@ -555,7 +613,7 @@ function ctxJogo(){
   return{melhor:Math.max(seq.n,+recordes.melhorSeq||0),maxRun,menos,media,guardado,
     metaBatida:metas.some(m=>+m.alvo>0&&saldoMeta(m.id)>=+m.alvo),
     desOk:desafios.filter(d=>(d.status||avaliarDesafio(d).estado)==="conseguiu").length,
-    fatEmDia,contasEmDia,mesesGuardou:ks.filter(k=>meses[k].g>0).length,temLanc:lancs.length>0||lancsRec.length>0||ks.length>0};
+    fatEmDia,contasEmDia,enfeites:ITENS.filter(i=>!i.conq&&temItem(i.id)).length,salaCompleta:COMUNS.every(i=>temItem(i.id)),epoca:ITENS.some(i=>i.epoca&&temItem(i.id)),mesesGuardou:ks.filter(k=>meses[k].g>0).length,temLanc:lancs.length>0||lancsRec.length>0||ks.length>0};
 }
 function avaliarConquistas(){
   if(!jogoPronto())return;
@@ -573,7 +631,7 @@ function mostrarCelebracao(){
   const ids=celebrar.splice(0);openSheet("conq",{},{ids});
 }
 let tickT=null;
-function jogoTick(){clearTimeout(tickT);tickT=setTimeout(()=>{atualizarMeses();finalizarDesafios();avaliarConquistas();render();mostrarCelebracao()},250)}
+function jogoTick(){clearTimeout(tickT);tickT=setTimeout(()=>{atualizarMeses();finalizarDesafios();avaliarConquistas();render();mostrarCelebracao();setTimeout(mostrarPremio,400)},250)}
 
 /* --- resumo e nota do mês --- */
 function notaMes(k){
@@ -615,23 +673,25 @@ function seqHtml(compacto){
 function telaDesafios(){
   const n=Object.keys(conquistas).filter(id=>CONQ.some(c=>c[0]===id)).length,nv=nivel(n);
   const ativos=desafios.filter(d=>avaliarDesafio(d).estado==="andamento");
-  const fim=desafios.filter(d=>avaliarDesafio(d).estado!=="andamento").slice(0,10);
+  const fim=desafios.filter(d=>avaliarDesafio(d).estado!=="andamento").slice(0,10),sug=sugestaoDesafio(),pend=pendentesPremio();
   const card=d=>{const a=avaliarDesafio(d);
     return `<section class="card"><div class="cc-top"><div style="display:flex;flex-direction:column;gap:4px;min-width:0"><h2>${esc(d.titulo)}</h2>
       <div class="hint">${dBr(d.inicio)} a ${dBr(d.fim)} · ${a.restam===0?"último dia":"faltam "+a.restam+(a.restam===1?" dia":" dias")}</div></div>
       <button class="lnk" data-a="desistir" data-id="${esc(d.id)}">desistir</button></div>
       <div class="prog"><i style="width:${a.pct}%;background:${(d.tipo==="limite_cat"||d.tipo==="total")&&a.pct>85?"var(--warn)":"var(--accent)"}"></i></div>
-      <div class="hint num">${esc(a.txt)}</div></section>`};
+      <div class="hint num">${esc(a.txt)}</div><div class="sug-premio sm">${itemSVG("samambaia",22)}<small>Prêmio: um enfeite para a casa</small></div></section>`};
   return `<div class="wrap">
+    ${pend.length?`<section class="card alerta premio-card"><div class="masc-row"><div class="masc-art vivo">${casalSVG("comemorando")}</div><div class="balao"><b>Dona Maria</b><span>Vocês cumpriram ${pend.length>1?pend.length+" desafios":"“"+esc(pend[0].titulo)+"”"}! Venham escolher ${pend.length>1?"os enfeites":"o enfeite"}.</span></div></div><button class="btn" data-a="abrirPremio">Escolher agora</button></section>`:""}
     <section class="card nivel"><div class="hrow"><span class="eyebrow">Nível ${nv.i+1} da casa</span><small class="num">${n} de ${CONQ.length} conquistas</small></div>
       <div class="ninho-card">${ninhoSVG(nv.i+1)}</div>
       <div class="nivel-nome">${esc(nv.nome)}</div>
       <div class="prog"><i style="width:${nv.prox?Math.min(100,(n-NIVEIS[nv.i][0])/(nv.prox[0]-NIVEIS[nv.i][0])*100):100}%;background:var(--telha)"></i></div>
-      <div class="hint">${nv.prox?`Faltam ${nv.prox[0]-n} ${nv.prox[0]-n===1?"conquista":"conquistas"} para “${nv.prox[1]}”. A cada nível, a casa ganha mais tijolinhos.`:"Casa completa, com portinha e tudo!"}</div></section>
+      <div class="hint">${nv.prox?`Faltam ${nv.prox[0]-n} ${nv.prox[0]-n===1?"conquista":"conquistas"} para “${nv.prox[1]}”. A cada nível, a casa ganha mais tijolinhos e um cômodo novo.`:"Casa completa, com portinha e tudo!"}</div>
+      <button class="btn" data-a="entrarCasa"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-3px;margin-right:6px"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>Entrar na casa · ${nEnfeites()} ${nEnfeites()===1?"enfeite":"enfeites"}</button></section>
     ${seqHtml(false)}
     <section class="card"><div class="hrow"><h2>Desafios</h2><small>${ativos.length?ativos.length+" em andamento":""}</small></div>
-      ${ativos.length?"":`<div class="empty">Escolha um desafio curto, como uma semana sem delivery ou o mercado abaixo de um valor. O app acompanha sozinho com os lançamentos.</div>`}
-      <button class="btn" data-a="novoDesafio">+ Novo desafio</button></section>
+      ${sug?`<div class="balao"><b>${QUEM_FALA()}</b><span>${esc(sug.fala)}</span></div>${sugHtml(sug)}`:ativos.length?`<div class="hint">Cada desafio cumprido vale um enfeite para a casa.</div>`:`<div class="empty">Seu João e Dona Maria vão sugerir um desafio assim que tiverem uma boa ideia.</div>`}
+      <button class="lnk" data-a="novoDesafio" style="align-self:flex-start">criar um desafio do zero</button></section>
     ${ativos.map(card).join("")}
     ${fim.length?`<section class="card"><h2>Encerrados</h2>${fim.map(d=>{const a=avaliarDesafio(d);return `<div class="fim-row"><span>${esc(d.titulo)}<small>${dBr(d.inicio)} a ${dBr(d.fim)}</small></span><span class="pill ${a.estado==="conseguiu"?"ok":"bad"}">${a.estado==="conseguiu"?"conseguiu":"não deu"}</span></div>`}).join("")}</section>`:""}
     <section class="card"><div class="hrow"><h2>Conquistas</h2><small class="num">${n}/${CONQ.length}</small></div>
@@ -652,12 +712,12 @@ function passaro(expr,acc,flip,tx,ty,body){
   g.push(expr==="preocupado"?`<path d="M70 ${hy-12} Q78 ${hy-9} 86 ${hy-14}" stroke="#EBCB9F" stroke-width="3.5" stroke-linecap="round" fill="none"/>`:`<path d="M69 ${hy-9} Q78 ${hy-16} 87 ${hy-10}" stroke="#EBCB9F" stroke-width="3.5" stroke-linecap="round" fill="none"/>`);
   if(expr==="feliz"||expr==="comemorando")g.push(`<path d="M${ex-5} ${ey+1} Q${ex} ${ey-6} ${ex+5} ${ey+1}" stroke="${MC.ink}" stroke-width="2.8" stroke-linecap="round" fill="none"/><ellipse cx="${ex-3}" cy="${ey+9}" rx="4.5" ry="2.8" fill="#E98A6B" opacity=".55"/>`);
   else if(expr==="dormindo")g.push(`<path d="M${ex-5} ${ey} Q${ex} ${ey+4} ${ex+5} ${ey}" stroke="${MC.ink}" stroke-width="2.6" stroke-linecap="round" fill="none"/>`);
-  else g.push(`<circle cx="${ex}" cy="${ey}" r="5.5" fill="#fff"/><circle cx="${ex+1}" cy="${ey+.5}" r="3.4" fill="${MC.ink}"/><circle cx="${ex+2.2}" cy="${ey-1}" r="1.1" fill="#fff"/>`);
+  else g.push(`<g class="olho"><circle cx="${ex}" cy="${ey}" r="5.5" fill="#fff"/><circle cx="${ex+1}" cy="${ey+.5}" r="3.4" fill="${MC.ink}"/><circle cx="${ex+2.2}" cy="${ey-1}" r="1.1" fill="#fff"/></g>`);
   g.push(expr==="comemorando"?`<path d="M89 ${hy-2} Q99 ${hy-4} 106 ${hy-1} L90 ${hy+2} Z" fill="${MC.beak}"/><path d="M90 ${hy+3} L104 ${hy+6} Q96 ${hy+9} 89 ${hy+6} Z" fill="${MC.beak}"/>`:`<path d="M89 ${hy-1} Q99 ${hy-1} 106 ${hy+3} Q97 ${hy+5} 89 ${hy+5} Z" fill="${MC.beak}"/>`);
   if(acc==="chapeu")g.push(`<g transform="rotate(-8 70 ${hy-18})"><ellipse cx="70" cy="${hy-16}" rx="22" ry="5" fill="#E2BE73"/><path d="M58 ${hy-16} Q59 ${hy-33} 70 ${hy-33} Q81 ${hy-33} 82 ${hy-16} Z" fill="#EBCB84"/><rect x="58.5" y="${hy-21}" width="23" height="4" fill="#9C3D2C"/></g>`);
   if(acc==="flor"){const cx=62,cy=hy-17;for(let a=0;a<5;a++){const r=(a*72-90)*Math.PI/180;g.push(`<circle cx="${(cx+6*Math.cos(r)).toFixed(1)}" cy="${(cy+6*Math.sin(r)).toFixed(1)}" r="4.6" fill="#F08AA4"/>`)}g.push(`<circle cx="${cx}" cy="${cy}" r="3.4" fill="#F7C948"/>`)}
   if(expr==="preocupado")g.push(`<path d="M96 ${hy-22} Q92 ${hy-14} 96 ${hy-12} Q100 ${hy-14} 96 ${hy-22} Z" fill="#7FB7E6"/>`);
-  return `<g transform="translate(${tx},${ty})${flip?" translate(120,0) scale(-1,1)":""}">${g.join("")}</g>`;
+  return `<g transform="translate(${tx},${ty})${flip?" translate(120,0) scale(-1,1)":""}"><g class="ave">${g.join("")}</g></g>`;
 }
 function casalSVG(expr){
   let x="";
@@ -688,7 +748,7 @@ function estadoMascote(){
   const seq=sequencia(),v=vencimentos(),h=NOW().getHours(),hojeConq=Object.values(conquistas).some(d=>d===hoje());
   const urg=v.filter(i=>i.dd<=1);
   if(urg.length){const i=urg[0];return["preocupado",`Ô, ${i.nome} ${quando(i.dd)} (${fmt(i.valor)}), viu? Depois de pagar, é só marcar.`]}
-  if(hojeConq)return["comemorando","Conquista nova hoje! Dá uma olhada na aba Desafios. 🎉"];
+  if(hojeConq)return["comemorando","Conquista nova hoje! Dá uma olhada na aba Casa. 🎉"];
   const d=dicasAtuais.find(x=>x.id==="proj");
   if(d)return["preocupado","No ritmo atual, o mês fecha no vermelho. Bora segurar um pouquinho?"];
   if(seq.hojeOk&&h>=21)return["dormindo","Tudo anotado por hoje. Boa noite!"];
@@ -697,10 +757,12 @@ function estadoMascote(){
   return["feliz",h<12?"Bom dia! Lançou algum gasto hoje? Se não gastou nada, é só tocar em “Hoje não gastei”.":"E aí, teve gasto hoje? Se não teve, toca em “Hoje não gastei”."];
 }
 function mascoteHtml(){
-  const [ex,fala]=estadoMascote(),seq=sequencia();
+  let [ex,fala]=estadoMascote();const seq=sequencia(),sug=(ex==="feliz"||ex==="dormindo")?sugestaoDesafio():null;
+  if(sug){ex="feliz";fala=sug.fala}
   return `<section class="card mascote">
-    <div class="masc-row"><div class="masc-art">${casalSVG(ex)}</div>
+    <div class="masc-row"><button class="masc-art vivo" data-a="conversa" aria-label="Conversar com Seu João e Dona Maria">${casalSVG(ex)}</button>
     <div class="balao"><b>${QUEM_FALA()}</b><span>${esc(fala)}</span></div></div>
+    ${sug?sugHtml(sug):""}
     <div class="hrow masc-seq"><span class="seq-n"><span class="fogo">🧱</span><b class="num">${seq.n}</b> ${seq.n===1?"dia seguido":"dias seguidos"}</span>
     ${seq.hojeOk?`<span class="pill ok">hoje registrado</span>`:`<button class="btn sm" data-a="naoGastei">Hoje não gastei</button>`}</div>
   </section>`;
@@ -710,7 +772,7 @@ function mascoteHtml(){
 let dicasCfg={off:{},adiadas:{}},dicasAtuais=[];
 const normD=s=>String(s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/\(\d+\/\d+\)/,"").replace(/\s+/g," ").trim();
 const r10=v=>Math.max(10,Math.round(v/10)*10);
-function calcDicas(){
+function calcDicasBase(){
   const out=[],h=hoje(),cur=curYm(),dia=+h.slice(8),nd=lastDay(cur);
   const all=todosLancs(),doM=k=>all.filter(l=>(l.data||"").slice(0,7)===k);
   const mes=doM(cur),saidas=mes.filter(l=>l.tipo==="saida");
@@ -784,7 +846,10 @@ function calcDicas(){
   // 9. reserva de emergência
   const media=ks.length?ks.reduce((a,k)=>a+meses[k].s,0)/ks.length:0,guard=metas.reduce((a,m)=>a+saldoMeta(m.id),0);
   if(ks.length>=2&&media>0&&guard<media)out.push({id:"reserva",prio:25,txt:`Que tal uma reserva de emergência? O ideal é juntar de 3 a 6 meses de gastos: algo entre ${fmt0(media*3)} e ${fmt0(media*6)}.`,acao:{t:"meta",lbl:"Criar a reserva",v:{nome:"Reserva de emergência",alvo:vIn(r10(media*3)),prazo:""}}});
-  // filtros
+  return out;
+}
+function calcDicas(){
+  const h=hoje(),cur=curYm(),out=calcDicasBase();
   return out.filter(d=>{const tipo=d.id.split("-")[0];if((dicasCfg.off||{})[tipo]||(dicasCfg.off||{})[d.id])return false;const ad=(dicasCfg.adiadas||{})[d.id+"@"+cur];return !(ad&&ad>=h)})
     .sort((a,b)=>b.prio-a.prio).slice(0,3);
 }
@@ -798,6 +863,197 @@ function dicasHtml(){
   </section>`;
 }
 
+/* ================= quem lança ================= */
+function meuNome(){
+  const em=(window.__email||"").toLowerCase(),lst=(CFG.emailsPermitidos||[]).map(x=>String(x).toLowerCase()),i=lst.indexOf(em);
+  return (i>=0&&config.nomes[i])||(em?em.split("@")[0]:"Eu");
+}
+
+/* ================= reações dos mascotes ================= */
+let reacT=null;
+function reagir(expr,fala){
+  const el=$("#reacao");if(!el)return;
+  el.innerHTML=`<div class="reac-art vivo pula">${casalSVG(expr)}</div><div class="balao"><b>${QUEM_FALA()}</b><span>${esc(fala)}</span></div>`;
+  el.hidden=false;requestAnimationFrame(()=>el.classList.add("show"));
+  clearTimeout(reacT);reacT=setTimeout(()=>{el.classList.remove("show");setTimeout(()=>{el.hidden=true},300)},3600);
+}
+function reagirLanc(base,n){
+  if(base.tipo==="entrada")return reagir("feliz","Oba, dinheiro entrando!");
+  const ref=Math.max(300,(fixas.filter(f=>f.tipo==="entrada").reduce((a,f)=>a+(+f.valor||0),0))*.08);
+  if(n>1)return reagir("preocupado",`Parcelou em ${n}x. A gente fica de olho nas parcelas, viu?`);
+  if(+base.valor>=ref)return reagir("preocupado","Eita! Esse foi dos grandes.");
+  const f=["Anotado!","Mais um tijolinho na casa!","Boa, tudo registrado.","Prontinho, já está na conta."];
+  reagir("feliz",f[Math.floor(Math.random()*f.length)]);
+}
+
+/* ================= desafio sugerido pelos mascotes ================= */
+function blocoSug(){const d=+hoje().slice(8);return "sug@"+curYm()+"-"+Math.floor((d-1)/3)}
+function sugestaoDesafio(){
+  if(!jr.desafios)return null;
+  const ativos=desafios.filter(d=>avaliarDesafio(d).estado==="andamento");
+  if(ativos.length>=2||(dicasCfg.adiadas||{})[blocoSug()])return null;
+  const h=hoje(),cur=curYm(),dia=+h.slice(8),nd=lastDay(cur),fimMes=cur+"-"+pad(nd);
+  const ja=new Set(ativos.map(d=>d.tipo+"|"+(d.cat||"")));
+  const ok=(t,c)=>!ja.has(t+"|"+(c||""));
+  const cands=[];
+  for(const d of calcDicasBase()){
+    if(!d.acao||d.acao.t!=="desafio"||nd-dia<4)continue;
+    const v=Object.assign({},d.acao.v,{inicio:h,fim:fimMes});
+    if(!ok(v.tipo,v.cat))continue;
+    cands.push({prio:d.prio,fala:d.txt+` Topam o desafio “${tituloDesafio(v)}” até o fim do mês?`,v});
+  }
+  const seq=sequencia();
+  if(seq.n<7&&ok("registrar"))cands.push({prio:15,fala:"Que tal 7 dias seguidos registrando tudo? Assim a casa cresce rapidinho.",v:{tipo:"registrar",inicio:h,fim:dAdd(h,6)}});
+  const deliv=todosLancs().filter(l=>l.tipo==="saida"&&l.cat==="Restaurante/Delivery"&&l.data>=dAdd(h,-30)).reduce((a,l)=>a+(+l.valor||0),0);
+  if(deliv>=80&&ok("sem_cat","Restaurante/Delivery"))cands.push({prio:12,fala:"Topam uma semana sem delivery? Cozinhar junto também é programa!",v:{tipo:"sem_cat",cat:"Restaurante/Delivery",inicio:h,fim:dAdd(h,6)}});
+  if(metas.length&&ok("guardar")&&nd-dia>=5){const ks=Object.keys(meses).filter(k=>k<cur).sort().slice(-3),me=ks.length?ks.reduce((a,k)=>a+meses[k].e,0)/ks.length:0;
+    const val=me>0?r10(me*.05):100;cands.push({prio:10,fala:`Bora guardar ${fmt0(val)} nas metas até o fim do mês? Todo pouquinho conta.`,v:{tipo:"guardar",valor:vIn(val),inicio:h,fim:fimMes}})}
+  cands.sort((a,b)=>b.prio-a.prio);
+  return cands[0]||null;
+}
+function aceitarSug(){
+  const s=sugestaoDesafio();if(!s)return;
+  const v=s.v,body={tipo:v.tipo,titulo:tituloDesafio(v),inicio:v.inicio,fim:v.fim,criadoEm:Date.now(),sugerido:true};
+  if(v.cat&&(v.tipo==="limite_cat"||v.tipo==="sem_cat"))body.cat=v.cat;
+  if(v.valor!==undefined&&v.valor!=="")body.valor=parseValor(v.valor);
+  const id=newId("desafios");desafios.unshift(Object.assign({id},body));put("desafios",id,body);
+  reagir("comemorando","Combinado! A gente acompanha com vocês.");
+}
+function recusarSug(){const k=blocoSug();dicasCfg.adiadas[k]=hoje();put("jogo","dicas",{adiadas:{[k]:hoje()}},true);reagir("feliz","Tranquilo, fica para outro dia.")}
+function sugHtml(s){
+  return `<div class="sug"><div class="sug-premio">${itemSVG("samambaia",34)}<div><b>Prêmio: um enfeite para a casa</b><small>Vocês escolhem entre 3 quando cumprirem</small></div></div>
+  <div class="row"><button class="btn" data-a="aceitarSug">Topamos!</button><button class="btn ghost" data-a="recusarSug" style="flex:0 0 auto">Agora não</button></div></div>`;
+}
+
+/* ================= conversa ================= */
+const CURIOS=[
+ "A regra 50-30-20 sugere separar a renda em 50% para necessidades, 30% para desejos e 20% para guardar.",
+ "Reserva de emergência boa cobre de 3 a 6 meses de gastos da casa.",
+ "Pagar só o mínimo do cartão joga o resto no rotativo, que tem um dos juros mais altos do país.",
+ "“Sem juros” no parcelado às vezes esconde um desconto à vista. Sempre vale perguntar!",
+ "Ir ao mercado com lista e sem fome ajuda a não encher o carrinho de coisa que não precisa.",
+ "Esperar um dia antes de uma compra que não estava nos planos ajuda a saber se é vontade ou necessidade.",
+ "Assinatura esquecida é dinheiro escorrendo: vale revisar todas a cada poucos meses.",
+ "Gastinho de R$ 10 por dia vira uns R$ 300 no fim do mês.",
+ "A casa do joão-de-barro tem uma paredinha por dentro que protege o ninho do vento e dos curiosos.",
+ "O casal de joão-de-barro constrói a casa junto, um pouquinho por dia. Igual a vocês!",
+ "Guardar logo que o salário cai funciona melhor do que guardar o que sobra no fim do mês.",
+ "Conta de luz alta? O chuveiro elétrico costuma ser um dos maiores gastos da casa."
+];
+function respostaConversa(k){
+  const cur=curYm(),t=totais(doMes(+cur.slice(0,4),+cur.slice(5))),v=vencimentos();
+  if(k==="mes")return `Este mês entrou ${fmt0(t.e)} e saiu ${fmt0(t.s)}. ${t.saldo>=0?"Sobraram "+fmt0(t.saldo)+" até agora.":"Por enquanto faltam "+fmt0(-t.saldo)+"."} ${v.length?`Tem ${v.length} ${v.length>1?"contas":"conta"} para os próximos dias.`:"Nenhuma conta vencendo nos próximos dias."}`;
+  if(k==="dica"){const ds=calcDicas();if(ds.length){S.di=((S.di??-1)+1)%ds.length;return ds[S.di].txt}return CURIOS[Math.floor(Math.random()*8)]}
+  if(k==="meta"){const m=metas.find(x=>+x.alvo>0);if(!m)return "Ainda não tem meta com valor. Que tal criar uma reserva de emergência na aba Metas?";const s=saldoMeta(m.id);return s>=m.alvo?`A meta “${m.nome}” já foi batida! ${fmt0(s)} guardados.`:`Na meta “${m.nome}” vocês já têm ${fmt0(s)} de ${fmt0(+m.alvo)} (${Math.round(s/m.alvo*100)}%). Faltam ${fmt0(m.alvo-s)}.`}
+  if(k==="desafio"){const s=sugestaoDesafio();return s?s.fala:"Vocês já estão com desafios em andamento. Vamos terminar esses primeiro!"}
+  return CURIOS[Math.floor(Math.random()*CURIOS.length)];
+}
+const PERGUNTAS=[["mes","Como estamos este mês?"],["dica","Me dá uma dica"],["desafio","Sugere um desafio"],["meta","Quanto falta para a meta?"],["curio","Conta uma curiosidade"]];
+
+/* ================= a casa por dentro ================= */
+const ITENS=[
+ {id:"tapete",nome:"Tapete",desc:"colorido e fofinho"},{id:"quadro",nome:"Quadro",desc:"paisagem do sul"},{id:"cortina",nome:"Cortinas",desc:"de florzinha"},
+ {id:"abajur",nome:"Abajur",desc:"luz amarelinha"},{id:"radio",nome:"Rádio antigo",desc:"toca uma modinha"},{id:"samambaia",nome:"Samambaia",desc:"verdinha no vaso"},
+ {id:"almofada",nome:"Almofada",desc:"para cochilar"},{id:"relogio",nome:"Relógio de parede",desc:"tique-taque"},{id:"retrato",nome:"Porta-retrato",desc:"foto do casal"},
+ {id:"gato",nome:"Gatinho",desc:"dorme no tapete"},
+ {id:"pisca",nome:"Pisca-pisca",desc:"só em dezembro",epoca:12},{id:"bandeirinhas",nome:"Bandeirinhas",desc:"só em junho",epoca:6},
+ {id:"placa",nome:"Plaquinha da família",desc:"conquista “Três no azul”",conq:"azul3"},{id:"trofeu",nome:"Troféu",desc:"conquista “Cinco desafios”",conq:"desafio5"}
+];
+const COMUNS=ITENS.filter(i=>!i.epoca&&!i.conq);
+let casa={itens:{},premiados:{}},casaView="fora",premioVisto=new Set();
+const temItem=id=>{const it=ITENS.find(i=>i.id===id);return !!((casa.itens||{})[id]||(it&&it.conq&&conquistas[it.conq]))};
+const itemAtivo=id=>temItem(id)&&!((casa.itens||{})[id]||{}).oculto;
+const nEnfeites=()=>ITENS.filter(i=>temItem(i.id)).length;
+function pendentesPremio(){if(!jr.jogo||!jr.desafios)return[];return desafios.filter(d=>(d.status||avaliarDesafio(d).estado)==="conseguiu"&&!(casa.premiados||{})[d.id])}
+function opcoesPremio(dz){
+  const mes=+curYm().slice(5),pool=ITENS.filter(i=>!temItem(i.id)&&!i.conq&&(!i.epoca||i.epoca===mes));
+  let seed=[...String(dz.id)].reduce((a,c)=>(a*31+c.charCodeAt(0))%233280,7);const rnd=()=>{seed=(seed*9301+49297)%233280;return seed/233280};
+  const ep=pool.filter(i=>i.epoca),cm=pool.filter(i=>!i.epoca).map(i=>[rnd(),i]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);
+  return [...ep,...cm].slice(0,3);
+}
+function escolherItem(dzId,itemId){
+  casa.itens=Object.assign({},casa.itens,{[itemId]:{em:hoje()}});casa.premiados=Object.assign({},casa.premiados,{[dzId]:itemId});
+  put("jogo","casa",{itens:{[itemId]:{em:hoje()}},premiados:{[dzId]:itemId}},true);
+  closeSheet();tab="desafios";casaView="sala";ls.set("tab",tab);render();window.scrollTo(0,0);
+  const it=ITENS.find(i=>i.id===itemId);reagir("comemorando",`${it?it.nome:"Enfeite"} na sala! Ficou lindo.`);
+}
+function toggleItem(id){const o=!!((casa.itens||{})[id]||{}).oculto;casa.itens=Object.assign({},casa.itens,{[id]:Object.assign({},(casa.itens||{})[id]||{em:hoje()},{oculto:!o})});put("jogo","casa",{itens:{[id]:{oculto:!o}}},true);render()}
+function mostrarPremio(){
+  if(S)return;const p=pendentesPremio().find(d=>!premioVisto.has(d.id));if(!p)return;
+  premioVisto.add(p.id);openSheet("premio",{},{dz:p,ops:opcoesPremio(p)});
+}
+
+/* desenhos dos enfeites */
+function itemSVG(id,h){
+  const g={
+    quadro:`<rect x="0" y="0" width="70" height="50" rx="4" fill="#8E5A36"/><rect x="6" y="6" width="58" height="38" fill="#BFE3F2"/><path d="M6 44 L24 22 L36 34 L46 24 L64 44 Z" fill="#6FAE5A"/><circle cx="50" cy="14" r="5" fill="#F7C948"/>`,
+    radio:`<rect x="0" y="12" width="54" height="36" rx="8" fill="#B8693A"/><rect x="5" y="18" width="26" height="24" rx="4" fill="#E9C9A0"/><g stroke="#8E4A26" stroke-width="1.5"><line x1="8" y1="23" x2="28" y2="23"/><line x1="8" y1="28" x2="28" y2="28"/><line x1="8" y1="33" x2="28" y2="33"/><line x1="8" y1="38" x2="28" y2="38"/></g><circle cx="43" cy="25" r="5" fill="#F3DEC2"/><circle cx="43" cy="38" r="4" fill="#5B3B25"/><path d="M14 12 L24 0" stroke="#5B3B25" stroke-width="2" stroke-linecap="round"/>`,
+    samambaia:`<path d="M20 30 Q6 10 2 0 Q14 6 22 26 Z" fill="#5E9E55"/><path d="M24 30 Q30 6 40 -6 Q36 12 28 30 Z" fill="#6FAE5A"/><path d="M22 30 Q16 4 20 -10 Q26 6 26 30 Z" fill="#4F8A4B"/><path d="M28 30 Q44 12 52 8 Q44 22 32 32 Z" fill="#5E9E55"/><path d="M8 30 L46 30 L41 58 L13 58 Z" fill="#C2774A"/><rect x="6" y="28" width="42" height="7" rx="3" fill="#A9532E"/>`,
+    tapete:`<ellipse cx="40" cy="20" rx="40" ry="14" fill="#E98A6B"/><ellipse cx="40" cy="20" rx="30" ry="10" fill="#F3C17A"/><ellipse cx="40" cy="20" rx="18" ry="6" fill="#E98A6B" opacity=".7"/>`,
+    cortina:`<path d="M0 0 L24 0 Q18 40 26 80 L0 80 Z" fill="#E98A6B"/><path d="M60 0 L36 0 Q42 40 34 80 L60 80 Z" fill="#E98A6B"/><circle cx="10" cy="20" r="3" fill="#FBF1E3"/><circle cx="16" cy="50" r="3" fill="#FBF1E3"/><circle cx="48" cy="30" r="3" fill="#FBF1E3"/><circle cx="44" cy="60" r="3" fill="#FBF1E3"/>`,
+    abajur:`<line x1="20" y1="26" x2="20" y2="70" stroke="#6B4A2F" stroke-width="4"/><ellipse cx="20" cy="71" rx="12" ry="4" fill="#6B4A2F"/><path d="M4 26 L36 26 L30 0 L10 0 Z" fill="#F7C948"/>`,
+    almofada:`<rect x="2" y="4" width="40" height="30" rx="9" fill="#F7C948" transform="rotate(-10 22 19)"/><path d="M10 12 L34 26" stroke="#E2A93A" stroke-width="2" opacity=".6"/>`,
+    relogio:`<circle cx="22" cy="22" r="20" fill="#8E5A36"/><circle cx="22" cy="22" r="15" fill="#FBF1E3"/><path d="M22 12 L22 22 L29 26" stroke="#3A2416" stroke-width="2.5" stroke-linecap="round" fill="none"/>`,
+    retrato:`<rect x="0" y="0" width="30" height="36" rx="3" fill="#C08656"/><rect x="4" y="4" width="22" height="24" fill="#F3DEC2"/><circle cx="11" cy="16" r="4" fill="#B8693A"/><circle cx="19" cy="16" r="4" fill="#C2774A"/><path d="M8 36 L4 44 M22 36 L26 44" stroke="#8E5A36" stroke-width="2.5"/>`,
+    gato:`<ellipse cx="30" cy="26" rx="26" ry="12" fill="#E2A15E"/><circle cx="52" cy="18" r="10" fill="#E2A15E"/><path d="M46 10 L48 2 L53 9 M55 9 L59 2 L60 11" fill="#E2A15E"/><path d="M48 18 Q50 20 52 18 M55 18 Q57 20 59 18" stroke="#5B3B25" stroke-width="1.5" fill="none"/><path d="M4 26 Q-6 18 2 12" stroke="#E2A15E" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M20 20 L24 32 M32 18 L36 32" stroke="#C8854A" stroke-width="2" opacity=".6"/>`,
+    pisca:`<path d="M0 6 Q20 16 40 6 Q60 16 80 6" stroke="#5B3B25" stroke-width="1.5" fill="none"/><circle cx="10" cy="11" r="4" fill="#F7C948"/><circle cx="26" cy="12" r="4" fill="#F08AA4"/><circle cx="40" cy="7" r="4" fill="#4DBFA4"/><circle cx="54" cy="12" r="4" fill="#8FA8E6"/><circle cx="70" cy="11" r="4" fill="#E98A6B"/>`,
+    bandeirinhas:`<path d="M0 2 L80 2" stroke="#5B3B25" stroke-width="1.5"/><path d="M2 2 L14 2 L8 16 Z" fill="#F08AA4"/><path d="M18 2 L30 2 L24 16 Z" fill="#F7C948"/><path d="M34 2 L46 2 L40 16 Z" fill="#4DBFA4"/><path d="M50 2 L62 2 L56 16 Z" fill="#8FA8E6"/><path d="M66 2 L78 2 L72 16 Z" fill="#E98A6B"/>`,
+    placa:`<path d="M30 0 L22 10 M30 0 L38 10" stroke="#6B4A2F" stroke-width="2"/><rect x="0" y="10" width="60" height="22" rx="5" fill="#C08656"/><text x="30" y="25" font-family="Arial" font-weight="700" font-size="7.2" fill="#FBF1E3" text-anchor="middle">LAR DOCE LAR</text>`,
+    trofeu:`<path d="M8 2 L32 2 L30 18 Q20 28 10 18 Z" fill="#F7C948"/><path d="M8 6 Q0 6 2 12 Q4 18 10 16 M32 6 Q40 6 38 12 Q36 18 30 16" stroke="#E2A93A" stroke-width="3" fill="none"/><rect x="17" y="24" width="6" height="8" fill="#E2A93A"/><rect x="10" y="32" width="20" height="6" rx="2" fill="#8E5A36"/>`
+  };
+  const vb={quadro:"-4 -4 78 58",radio:"-4 -4 62 56",samambaia:"-4 -14 62 76",tapete:"-2 4 84 32",cortina:"-2 -2 64 84",abajur:"0 -2 40 78",almofada:"-2 -4 48 44",relogio:"0 0 44 44",retrato:"-2 -2 34 48",gato:"-8 -2 72 42",pisca:"-2 0 84 18",bandeirinhas:"-2 0 84 18",placa:"-2 -2 64 36",trofeu:"-2 0 44 40"}[id]||"0 0 60 60";
+  return `<svg viewBox="${vb}" height="${h}" role="img" aria-label="${esc((ITENS.find(i=>i.id===id)||{}).nome||id)}" xmlns="http://www.w3.org/2000/svg">${g[id]||""}</svg>`;
+}
+const SLOT={quadro:[44,40,77,55],relogio:[154,48,44,44],cortina:[222,26,116,104],abajur:[198,100,34,108],radio:[282,108,50,42],samambaia:[296,200,52,60],tapete:[50,240,256,48],almofada:[126,120,40,34],retrato:[244,128,26,30],gato:[64,236,60,32]};
+function salaSVG(){
+  const o=[],A=itemAtivo;
+  o.push(`<rect width="360" height="210" fill="#F4E4C9"/>`);
+  for(let x=14;x<360;x+=28)for(let y=14;y<200;y+=28)o.push(`<circle cx="${x}" cy="${y}" r="2" fill="#E8D1AE"/>`);
+  o.push(`<rect y="200" width="360" height="10" fill="#B8693A"/><rect y="208" width="360" height="92" fill="#CF9C6E"/>`);
+  for(let i=0;i<5;i++)o.push(`<line x1="0" y1="${226+i*18}" x2="360" y2="${226+i*18}" stroke="#B5805A" stroke-width="1.5"/>`);
+  for(let r=0;r<5;r++)for(let i=0;i<5;i++){const x=(i*73+(r%2?37:0))%360;o.push(`<line x1="${x}" y1="${208+r*18}" x2="${x}" y2="${226+r*18}" stroke="#B5805A" stroke-width="1.5"/>`)}
+  if(A("bandeirinhas"))o.push(`<g transform="translate(10,4) scale(4.2,1.6)">${itemSVG("bandeirinhas",0).replace(/<svg[^>]*>|<\/svg>/g,"")}</g>`);
+  if(A("pisca"))o.push(`<g transform="translate(6,${A("bandeirinhas")?30:6}) scale(4.3,1.4)">${itemSVG("pisca",0).replace(/<svg[^>]*>|<\/svg>/g,"")}</g>`);
+  o.push(`<rect x="232" y="34" width="96" height="84" rx="6" fill="#8E5A36"/><rect x="239" y="41" width="82" height="70" fill="#BFE3F2"/><path d="M239 92 Q262 76 284 90 Q302 80 321 88 L321 111 L239 111 Z" fill="#9DCB8A"/><rect x="278" y="41" width="5" height="70" fill="#8E5A36"/><rect x="239" y="74" width="82" height="5" fill="#8E5A36"/><rect x="222" y="24" width="116" height="6" rx="3" fill="#6B4A2F"/>`);
+  const put_=(id,x,y,s)=>o.push(`<g transform="translate(${x},${y}) scale(${s})">${itemSVG(id,0).replace(/<svg[^>]*>|<\/svg>/g,"")}</g>`);
+  if(A("cortina"))o.push(`<path d="M226 28 L250 28 Q244 80 252 128 L226 128 Z" fill="#E98A6B"/><path d="M334 28 L310 28 Q316 80 308 128 L334 128 Z" fill="#E98A6B"/><circle cx="236" cy="50" r="3" fill="#FBF1E3"/><circle cx="242" cy="90" r="3" fill="#FBF1E3"/><circle cx="324" cy="60" r="3" fill="#FBF1E3"/><circle cx="318" cy="104" r="3" fill="#FBF1E3"/>`);
+  if(A("quadro"))put_("quadro",44,40,1.1);
+  if(A("relogio"))put_("relogio",154,48,1);
+  if(A("placa"))put_("placa",58,6,.75);
+  if(A("trofeu")){o.push(`<rect x="146" y="104" width="44" height="5" rx="2" fill="#8E5A36"/>`);put_("trofeu",156,82,.55)}
+  if(A("tapete"))o.push(`<ellipse cx="178" cy="262" rx="132" ry="24" fill="#E98A6B"/><ellipse cx="178" cy="262" rx="104" ry="17" fill="#F3C17A"/><ellipse cx="178" cy="262" rx="72" ry="11" fill="#E98A6B" opacity=".7"/>`);
+  o.push(`<rect x="18" y="146" width="170" height="40" rx="14" fill="#4F8A5B"/><rect x="26" y="118" width="154" height="40" rx="14" fill="#5E9E68"/><rect x="10" y="140" width="26" height="54" rx="12" fill="#467D51"/><rect x="170" y="140" width="26" height="54" rx="12" fill="#467D51"/><rect x="40" y="150" width="62" height="22" rx="9" fill="#6FAE7A"/><rect x="106" y="150" width="62" height="22" rx="9" fill="#6FAE7A"/><rect x="22" y="192" width="8" height="12" rx="2" fill="#6B4A2F"/><rect x="176" y="192" width="8" height="12" rx="2" fill="#6B4A2F"/>`);
+  if(A("almofada"))put_("almofada",124,118,.9);
+  if(A("abajur"))put_("abajur",196,130,1);
+  if(A("radio")||A("retrato"))o.push(`<rect x="240" y="156" width="100" height="8" rx="3" fill="#8E5A36"/><rect x="248" y="164" width="6" height="44" fill="#8E5A36"/><rect x="326" y="164" width="6" height="44" fill="#8E5A36"/>`);
+  if(A("radio"))put_("radio",284,110,.85);
+  if(A("retrato"))put_("retrato",248,124,.85);
+  if(A("samambaia"))put_("samambaia",302,214,.85);
+  if(A("gato"))put_("gato",66,240,.85);
+  const prox=COMUNS.filter(i=>!temItem(i.id)).slice(0,2);
+  for(const it of prox){const [x,y,w,h]=SLOT[it.id];o.push(`<g opacity=".75"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="8" fill="none" stroke="#B57B4C" stroke-width="2.5" stroke-dasharray="6 5"/><path d="M${x+w/2} ${y+h/2-8} L${x+w/2} ${y+h/2+8} M${x+w/2-8} ${y+h/2} L${x+w/2+8} ${y+h/2}" stroke="#B57B4C" stroke-width="3" stroke-linecap="round"/></g>`)}
+  o.push(`<g transform="translate(116,150) scale(.5)" class="vivo-g">${passaro("feliz","chapeu",false,0,0,MC.ruf)}${passaro("feliz","flor",true,118,0,"#C2774A")}</g>`);
+  return `<svg viewBox="0 0 360 300" role="img" aria-label="A sala da casa, com ${nEnfeites()} enfeites" xmlns="http://www.w3.org/2000/svg">${o.join("")}</svg>`;
+}
+const COMODOS=[["sala","Sala",1],["cozinha","Cozinha",3],["quarto","Quarto",4],["quintal","Quintal",5]];
+let comodo="sala";
+function telaSala(){
+  const n=Object.keys(conquistas).filter(id=>CONQ.some(c=>c[0]===id)).length,nv=nivel(n).i+1;
+  const pend=pendentesPremio();
+  const tabs=COMODOS.map(([id,nome,lv])=>`<button class="comodo${comodo===id?" on":""}" data-a="comodo" data-v="${id}" ${nv<lv?"disabled":""}>${esc(nome)}${nv<lv?`<small>nível ${lv}</small>`:""}</button>`).join("");
+  let corpo;
+  if(comodo==="sala")corpo=`<div class="sala-art vivo">${salaSVG()}<button class="sala-masc" data-a="conversa" aria-label="Conversar com Seu João e Dona Maria"></button></div>
+    <section class="card"><div class="hrow"><h2>Enfeites da sala</h2><small>${ITENS.filter(i=>temItem(i.id)).length} de ${ITENS.length}</small></div>
+    ${pend.length?`<button class="btn" data-a="abrirPremio">Escolher ${pend.length>1?pend.length+" enfeites ganhos":"o enfeite ganho"}</button>`:""}
+    <div class="itens">${ITENS.map(it=>{const tem=temItem(it.id),at=itemAtivo(it.id);
+      return tem?`<button class="item-c${at?" on":""}" data-a="toggleItem" data-v="${it.id}" aria-pressed="${at}">${itemSVG(it.id,34)}<b>${esc(it.nome)}</b><small>${at?"na sala":"guardado"}</small></button>`
+      :`<div class="item-c lock">${it.epoca||it.conq?itemSVG(it.id,30):`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>`}<b>${esc(it.nome)}</b><small>${it.conq?esc(it.desc):it.epoca?esc(it.desc):"cumpra um desafio"}</small></div>`}).join("")}</div>
+    <div class="hint">Toque num enfeite para tirar ou pôr de volta na sala. Toque no Seu João e na Dona Maria para conversar.</div></section>`;
+  else corpo=`<section class="card"><h2>${esc(COMODOS.find(c=>c[0]===comodo)[1])}</h2><div class="empty">Esse cômodo já está liberado e chega na próxima atualização do app, com enfeites novos. Enquanto isso, a sala está esperando vocês!</div></section>`;
+  return `<div class="wrap"><div class="row" style="align-items:center"><button class="btn sm ghost" data-a="sairCasa" style="flex:0 0 auto">‹ Sair da casa</button><small class="hint" style="margin-left:auto">${nEnfeites()} enfeites</small></div>
+    <div class="comodos">${tabs}</div>${corpo}</div>`;
+}
+
 /* ================= telas ================= */
 function render(){
   $("#mesLbl").textContent=ymNome(ymKey());
@@ -805,7 +1061,7 @@ function render(){
   $("#fab").hidden=!["mes","ano","cartoes"].includes(tab);
   const v=$("#view");
   const sy=window.scrollY;
-  v.innerHTML=tab==="mes"?telaMes():tab==="ano"?telaAno():tab==="cartoes"?telaCartoes():tab==="fixas"?telaFixas():tab==="metas"?telaMetas():tab==="desafios"?telaDesafios():telaAjustes();
+  v.innerHTML=tab==="mes"?telaMes():tab==="ano"?telaAno():tab==="cartoes"?telaCartoes():tab==="fixas"?telaFixas():tab==="metas"?telaMetas():tab==="desafios"?(casaView==="sala"?telaSala():telaDesafios()):telaAjustes();
   window.scrollTo(0,sy);
   if(tab==="ajustes")pushUI();
 }
@@ -876,7 +1132,7 @@ function telaMes(){
   </div>
   ${ehAtual?dicasHtml():""}
   <section class="card"><div class="hrow"><h2>Para onde foi o dinheiro</h2><small class="num">${t.e?Math.round(t.s/t.e*100)+"% da renda":""}</small></div>${catsHtml}</section>
-  ${quemHtml?`<section class="card"><div class="hrow"><h2>Quem gastou</h2><small>toque para ver</small></div>${quemHtml}</section>`:""}
+  ${quemHtml?`<section class="card"><div class="hrow"><h2>Quem lançou</h2><small>toque para ver</small></div>${quemHtml}</section>`:""}
   <section class="card"><div class="hrow"><h2>Lançamentos</h2><small>${arr.length} no mês</small></div>${listaPorDia(arr)||`<div class="empty">Toque em “+ Lançar” para registrar o primeiro gasto ou o salário.</div>`}</section>
   </div>`;
 }
@@ -979,7 +1235,7 @@ function telaMetas(){
 function telaAjustes(){
   return `<div class="wrap">
   <section class="card"><h2>Quem usa</h2>
-    <div class="grid2"><label class="f">Nome 1<input class="in" id="aj0" value="${esc(config.nomes[0]||"")}"></label><label class="f">Nome 2<input class="in" id="aj1" value="${esc(config.nomes[1]||"")}"></label></div></section>
+    <div class="grid2"><label class="f">Nome de ${esc((CFG.emailsPermitidos||[])[0]||"pessoa 1")}<input class="in" id="aj0" value="${esc(config.nomes[0]||"")}"></label><label class="f">Nome de ${esc((CFG.emailsPermitidos||[])[1]||"pessoa 2")}<input class="in" id="aj1" value="${esc(config.nomes[1]||"")}"></label></div></section>
   <section class="card"><div class="hrow"><h2>Limite por categoria</h2><small>por mês, opcional</small></div>
     ${CATS_SAIDA.map((c,i)=>`<label class="f" style="flex-direction:row;align-items:center;justify-content:space-between;gap:10px"><span style="font-weight:500;color:var(--ink)">${esc(c)}</span><input class="in num" id="lim${i}" inputmode="decimal" style="max-width:9em;text-align:right" placeholder="—" value="${esc(vIn(config.limites[c]))}"></label>`).join("")}
   </section>
@@ -1002,7 +1258,7 @@ function telaAjustes(){
 /* ================= folha (sheet) ================= */
 let S=null;
 function openSheet(mode,v,extra){S=Object.assign({mode,v:Object.assign({},v)},extra||{});drawSheet();$("#scrim").hidden=false;$("#sheet").hidden=false;$("#sheet").scrollTop=0}
-function closeSheet(){S=null;$("#scrim").hidden=true;$("#sheet").hidden=true;if(celebrar.length)setTimeout(mostrarCelebracao,300)}
+function closeSheet(){S=null;$("#scrim").hidden=true;$("#sheet").hidden=true;if(celebrar.length)setTimeout(mostrarCelebracao,300);else setTimeout(mostrarPremio,500)}
 function syncInputs(){if(!S)return;document.querySelectorAll("#sheetBody [data-k]").forEach(i=>{if(i.tagName==="BUTTON")return;S.v[i.dataset.k]=i.type==="checkbox"?i.checked:i.value})}
 const chips=(k,opts,cur,labels)=>`<div class="chips">${opts.map((o,i)=>`<button type="button" data-a="set" data-k="${k}" data-v="${esc(o)}" class="${o===cur?"on":""}">${esc(labels?labels[i]:o)}</button>`).join("")}</div>`;
 const lbl=t=>`<div class="day">${t}</div>`;
@@ -1025,7 +1281,7 @@ function drawSheet(){
     (meta?`<div class="hint">${orig.mov==="retirar"?"Retirada de":"Guardado em"} <b>${esc(nomeMeta(orig.meta))}</b></div>`:`<div class="seg"><button type="button" data-a="set" data-k="tipo" data-v="saida" class="${v.tipo==="saida"?"on":""}">Saiu</button><button type="button" data-a="set" data-k="tipo" data-v="entrada" class="${v.tipo==="entrada"?"on":""}">Entrou</button></div>`)+
     `<div class="valor"><span>R$</span><input id="fValor" data-k="valor" class="num" inputmode="decimal" placeholder="0,00" value="${esc(v.valor)}" aria-label="Valor${card&&!v.id?" total":""}"></div>`+
     (meta?"":lbl("Categoria")+chips("cat",cats,v.cat))+
-    lbl("Quem")+chips("quem",quemOpts(),v.quem)+
+    `<div class="por"><span class="av">${esc((v.id?(orig.quem||"?"):meuNome()).slice(0,1).toUpperCase())}</span><span>Lançado por <b>${esc(v.id?(orig.quem||"—"):meuNome())}</b></span></div>`+
     (v.tipo==="saida"?lbl("Pagamento")+chips("forma",["conta",...cartoes.map(c=>c.id)],v.forma,["Pix / débito / dinheiro",...cartoes.map(c=>"💳 "+c.nome)]):"")+
     (card&&!v.id&&!orig.parcela?`<label class="f">Parcelas<input class="in num" type="number" min="1" max="36" data-k="parcelas" value="${esc(v.parcelas||1)}" inputmode="numeric"></label>`:"")+
     (card?`<div class="hint" id="fatHint"></div>`:"")+
@@ -1043,7 +1299,7 @@ function drawSheet(){
     <label class="f">Nome<input class="in" data-k="nome" placeholder="${ent?"Ex.: Salário Sahar":"Ex.: Luz (Celesc)"}" value="${esc(v.nome)}"></label>
     <div class="grid2"><label class="f">Valor${ent?"":" médio"}<input class="in num" data-k="valor" inputmode="decimal" placeholder="0,00" value="${esc(v.valor)}"></label>
     <label class="f">${ent?"Cai no dia":"Vence dia"}<input class="in num" data-k="dia" inputmode="numeric" placeholder="10" value="${esc(v.dia)}"></label></div>`+
-    lbl("Categoria")+chips("cat",cats,v.cat)+lbl("Quem")+chips("quem",quemOpts(),v.quem)+
+    lbl("Categoria")+chips("cat",cats,v.cat)+
     (!ent&&cartoes.length?lbl("Pagamento")+chips("cartao",["",...cartoes.map(c=>c.id)],v.cartao||"",["Pix / débito / boleto",...cartoes.map(c=>"💳 "+c.nome)]):"")+
     `<label class="tg"><input type="checkbox" data-k="auto" ${v.auto?"checked":""}> Lançar sozinho todo mês, no dia</label>
     <div class="hint">Desligado: você marca na lista quando pagar. Ligado: entra sozinho a partir deste mês (se já lançou neste mês, desmarque na lista para não duplicar).</div>`+
@@ -1062,6 +1318,22 @@ function drawSheet(){
     <div class="grid2"><label class="f">Quanto quer juntar<input class="in num" data-k="alvo" inputmode="decimal" placeholder="opcional" value="${esc(v.alvo)}"></label>
     <label class="f">Até quando<input class="in" type="month" data-k="prazo" value="${esc(v.prazo)}"></label></div>`+
     errBox+`<div class="row">${v.id?`<button class="btn danger" data-a="excluirMeta">Excluir</button>`:""}<button class="btn" data-a="salvarMeta">Salvar</button></div>`;return}
+  if(S.mode==="conversa"){
+    const last=S.hist[S.hist.length-1];
+    b.innerHTML=head("Seu João e Dona Maria")+`<div class="masc-art vivo conv-art">${casalSVG(S.expr||"feliz")}</div>
+    <div class="chat">${S.hist.map(m=>m.q?`<div class="msg eu">${esc(m.q)}</div>`:`<div class="msg ele"><b>${esc(m.quem)}</b><span>${esc(m.t)}</span></div>`).join("")}</div>
+    ${last&&last.sug?`<div class="row"><button class="btn" data-a="aceitarSugConv">Topamos!</button><button class="btn ghost" data-a="recusarSugConv" style="flex:0 0 auto">Agora não</button></div>`:""}
+    <div class="perguntas">${PERGUNTAS.map(([k,t])=>`<button class="btn ghost sm" data-a="perg" data-v="${k}">${esc(t)}</button>`).join("")}</div>`;
+    const c=b.querySelector(".chat");if(c)c.scrollTop=c.scrollHeight;return}
+  if(S.mode==="premio"){
+    const ops=S.ops||[];
+    b.innerHTML=`<div class="celebra"><div class="confete" aria-hidden="true">${"<i></i>".repeat(18)}</div><div class="masc-art">${casalSVG("comemorando")}</div>
+      <div class="eyebrow" style="text-align:center;color:var(--in)">Desafio cumprido</div>
+      <div class="nivel-nome" style="font-size:1.4rem">${esc(S.dz.titulo)}</div>
+      ${ops.length?`<div class="hint" style="text-align:center;font-family:var(--hand);font-size:1.1rem">Vocês mandaram bem! Escolham um enfeite para a sala:</div>
+      <div class="ops">${ops.map(it=>`<button class="op" data-a="escolherItem" data-v="${it.id}">${itemSVG(it.id,48)}<b>${esc(it.nome)}</b><small>${esc(it.desc)}</small></button>`).join("")}</div>
+      <button class="lnk" data-a="fechar" style="align-self:center">escolher depois</button>`
+      :`<div class="hint" style="text-align:center">A sala já está completa! Os próximos cômodos chegam numa atualização.</div><button class="btn" data-a="premioOk">Boa!</button>`}</div>`;return}
   if(S.mode==="desafio"){
     const precisaCat=v.tipo==="limite_cat"||v.tipo==="sem_cat",precisaVal=["limite_cat","total","guardar"].includes(v.tipo);
     b.innerHTML=head("Novo desafio")+
@@ -1083,7 +1355,6 @@ function drawSheet(){
     b.innerHTML=head((v.mov==="retirar"?"Retirar de ":"Guardar em ")+esc(nomeMeta(v.meta)))+
     `<div class="hint num">Saldo da meta: ${fmt(s)}</div>
     <div class="valor"><span>R$</span><input data-k="valor" class="num" inputmode="decimal" placeholder="0,00" value="${esc(v.valor)}" aria-label="Valor"></div>`+
-    lbl("Quem")+chips("quem",quemOpts(),v.quem)+
     `<label class="f">Data<input class="in" type="date" data-k="data" value="${esc(v.data)}"></label>`+
     errBox+`<div class="row"><button class="btn" data-a="salvarMov">${v.mov==="retirar"?"Retirar":"Guardar"}</button></div>`;return}
 }
@@ -1113,20 +1384,20 @@ function salvarLanc(){
   if(!/^\d{4}-\d{2}-\d{2}$/.test(v.data))return sErr("Escolha a data.");
   if(v.tipo==="meta"){
     if(orig.mov==="retirar"&&val>saldoMeta(orig.meta)+(+orig.valor||0)+0.001)return sErr("Não dá para retirar mais do que está guardado.");
-    put("lanc",v.id,Object.assign({},stripId(orig),{valor:val,data:v.data,quem:v.quem||"",desc:v.desc.trim().slice(0,80)}));marcarDia();return done(v.data)}
+    put("lanc",v.id,Object.assign({},stripId(orig),{valor:val,data:v.data,quem:orig.quem||meuNome(),desc:v.desc.trim().slice(0,80)}));marcarDia();return done(v.data)}
   const card=v.tipo==="saida"&&cartoes.find(c=>c.id===v.forma);
-  const base={data:v.data,tipo:v.tipo,valor:val,cat:v.cat,quem:v.quem||"",desc:v.desc.trim().slice(0,80),criadoEm:orig.criadoEm||Date.now()};
+  const base={data:v.data,tipo:v.tipo,valor:val,cat:v.cat,quem:orig.quem||meuNome(),desc:v.desc.trim().slice(0,80),criadoEm:orig.criadoEm||Date.now()};
   if(orig.fixa)base.fixa=orig.fixa;
   if(orig.parcela)base.parcela=orig.parcela;
   if(card){base.cartao=card.id;base.fatura=faturaDe(v.data,card)}
-  if(v.quem)ls.set("quem",v.quem);if(v.tipo==="saida")ls.set("forma",v.forma);
+  if(v.tipo==="saida")ls.set("forma",v.forma);
   const n=Math.max(1,Math.min(36,parseInt(v.parcelas,10)||1));
   if(!v.id&&card&&n>1){
     const g=newId("lanc"),per=Math.floor(val/n*100)/100,desc=base.desc||base.cat;
     for(let i=0;i<n;i++){const d=addMonths(v.data,i);
       put("lanc",g+"-"+(i+1),Object.assign({},base,{data:d,valor:i===n-1?r2(val-per*(n-1)):per,desc:desc+" ("+(i+1)+"/"+n+")",fatura:faturaDe(d,card),parcela:{i:i+1,n,grupo:g},criadoEm:Date.now()+i}))}
   }else put("lanc",v.id||newId("lanc"),base);
-  marcarDia();done(v.data);
+  marcarDia();done(v.data);if(!v.id)reagirLanc(base,n);
 }
 const stripId=o=>{const c=Object.assign({},o);delete c.id;return c};
 function done(ds){closeSheet();if(tab==="mes"||tab==="ano"){const [y,m]=ds.split("-").map(Number);if(y!==ym.y||m!==ym.m){ym={y,m};mudouMes()}}render()}
@@ -1171,15 +1442,15 @@ function salvarMov(){
   if(!(val>0))return sErr("Digite o valor.");
   if(v.mov==="retirar"&&val>saldoMeta(v.meta)+0.001)return sErr("Não dá para retirar mais do que está guardado ("+fmt(saldoMeta(v.meta))+").");
   if(!/^\d{4}-\d{2}-\d{2}$/.test(v.data))return sErr("Escolha a data.");
-  put("lanc",newId("lanc"),{data:v.data,tipo:"meta",mov:v.mov,meta:v.meta,valor:val,cat:"Metas",quem:v.quem||"",desc:"",criadoEm:Date.now()});
-  marcarDia();closeSheet();
+  put("lanc",newId("lanc"),{data:v.data,tipo:"meta",mov:v.mov,meta:v.meta,valor:val,cat:"Metas",quem:meuNome(),desc:"",criadoEm:Date.now()});
+  marcarDia();closeSheet();reagir(v.mov==="retirar"?"feliz":"comemorando",v.mov==="retirar"?"Tudo bem usar a reserva quando precisa.":"Guardou! A casa agradece.");
 }
 function toggleFixa(f){
   const k=ymKey(),st=fixaStatus(f,k);
   if(st){del("lanc",st);put("pagos",k,{[f.id]:"pulado"},true)}
-  else{lancarFixa(f,k,true);marcarDia()}
+  else{lancarFixa(f,k,true);marcarDia();reagir("feliz",f.tipo==="entrada"?"Dinheiro na conta! Boa.":"Ufa, menos uma!")}
 }
-function toggleFatura(id){const k=ymKey(),pg=!!(faturasPg[k]||{})[id];put("faturas",k,{[id]:!pg,[id+"_em"]:pg?null:hoje()},true);if(!pg)marcarDia()}
+function toggleFatura(id){const k=ymKey(),pg=!!(faturasPg[k]||{})[id];put("faturas",k,{[id]:!pg,[id+"_em"]:pg?null:hoje()},true);if(!pg){marcarDia();reagir("feliz","Fatura paga, que alívio!")}}
 function salvarAjustes(btn){
   const lim={};CATS_SAIDA.forEach((c,i)=>{const v=parseValor($("#lim"+i).value);if(v>0)lim[c]=v});
   const nomes=[$("#aj0").value.trim()||"Eu",$("#aj1").value.trim()||"Esposa"];
@@ -1240,7 +1511,7 @@ document.addEventListener("click",ev=>{
   const a=t.dataset.a,id=t.dataset.id,val=t.dataset.v;
   if(S&&$("#sheet").contains(t))syncInputs();
   switch(a){
-    case "tab":tab=val;if(tab!=="ajustes")ls.set("tab",tab);render();window.scrollTo(0,0);break;
+    case "tab":tab=val;casaView="fora";if(tab!=="ajustes")ls.set("tab",tab);render();window.scrollTo(0,0);break;
     case "mes":ym.m+=+val;if(ym.m<1){ym.m=12;ym.y--}if(ym.m>12){ym.m=1;ym.y++}mudouMes();render();break;
     case "novo":novoLanc();break;
     case "fechar":closeSheet();break;
@@ -1264,7 +1535,21 @@ document.addEventListener("click",ev=>{
     case "excluirMeta":if(!t.classList.contains("armed")){t.classList.add("armed");t.textContent="Toque de novo";break}del("metas",S.v.id);closeSheet();break;
     case "mov":openSheet("mov",{meta:id,mov:val,valor:"",quem:ls.get("quem",config.nomes[0]),data:hoje()});break;
     case "salvarMov":salvarMov();break;
-    case "naoGastei":marcarDia(true);render();jogoTick();break;
+    case "conversa":openSheet("conversa",{},{hist:[{quem:"Dona Maria",t:`Oi, ${meuNome()}! Quer saber alguma coisa da casa?`}],expr:"feliz"});break;
+    case "perg":{const lbl_=(PERGUNTAS.find(x=>x[0]===val)||[])[1]||"";S.hist.push({q:lbl_});const quem=S.hist.filter(m=>!m.q).length%2?"Seu João":"Dona Maria";
+      const t_=respostaConversa(val),sg=val==="desafio"&&sugestaoDesafio();S.hist.push({quem,t:t_,sug:!!sg});S.expr=val==="curio"?"comemorando":"feliz";drawSheet();break}
+    case "aceitarSugConv":aceitarSug();S.hist.push({quem:"Seu João",t:"Combinado! Está lá na aba Casa. Boa sorte para nós!"});S.expr="comemorando";drawSheet();break;
+    case "recusarSugConv":recusarSug();S.hist.push({quem:"Dona Maria",t:"Tranquilo, fica para outro dia."});drawSheet();break;
+    case "aceitarSug":aceitarSug();render();break;
+    case "recusarSug":recusarSug();render();break;
+    case "entrarCasa":casaView="sala";comodo="sala";render();window.scrollTo(0,0);break;
+    case "sairCasa":casaView="fora";render();window.scrollTo(0,0);break;
+    case "comodo":comodo=val;render();break;
+    case "toggleItem":toggleItem(val);break;
+    case "abrirPremio":{const p=pendentesPremio()[0];if(p)openSheet("premio",{},{dz:p,ops:opcoesPremio(p)});break}
+    case "escolherItem":escolherItem(S.dz.id,val);break;
+    case "premioOk":{const id_=S.dz.id;casa.premiados=Object.assign({},casa.premiados,{[id_]:"completo"});put("jogo","casa",{premiados:{[id_]:"completo"}},true);closeSheet();render();break}
+    case "naoGastei":marcarDia(true);render();jogoTick();reagir("comemorando","Dia sem gastos? Assim que se faz!");break;
     case "dicaVer":{const d=dicasAtuais[+val];if(d)openSheet("list",{},{title:"Gastos desta dica",items:d.itens||[],semMes:true});break}
     case "dicaAcao":{const d=dicasAtuais[+val];if(!d||!d.acao)break;const ac=d.acao;
       if(ac.t==="desafio"){const fimMes=curYm()+"-"+pad(lastDay(curYm()));openSheet("desafio",Object.assign({tipo:"total",cat:"Mercado",valor:"",inicio:hoje(),fim:fimMes,per:"mes",sug:false},ac.v,{inicio:hoje(),fim:fimMes}))}

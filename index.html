@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Contas da Casa</title>
-<meta name="theme-color" content="#A9532E">
+<meta name="theme-color" content="#CC5A2C">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -14,6 +14,7 @@
 <link rel="icon" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&family=Patrick+Hand&display=swap">
+<script>try{document.documentElement.dataset.tema=localStorage.getItem("tema")||"claro"}catch(e){document.documentElement.dataset.tema="claro"}</script>
 <style>
 html{color-scheme:light}
 html{overscroll-behavior-y:none;background:var(--bg)}
@@ -22,18 +23,26 @@ input,textarea,select{-webkit-user-select:text;user-select:text}
 [hidden]{display:none!important}
 :root{
   /* Casa de joão-de-barro: papel creme, telha, folha, tijolo */
-  --bg:#F5EEE3; --surface:#FFFBF5; --ink:#3A2A1F; --muted:#86705E; --line:#E8DBC9;
-  --accent:#3E7C4F; --accent-ink:#FFFBF5; --soft:#F0E5D4;
-  --in:#3E8A52; --out:#C2502F; --warn:#C4861A; --save:#3F6EA8;
+  --bg:#FFF7EA; --surface:#FFFFFF; --ink:#3A2A1F; --muted:#8A705A; --line:#F1E3CD;
+  --accent:#28894D; --accent-ink:#FFFFFF; --soft:#FFF0D8;
+  --in:#2B9452; --out:#DD5434; --warn:#E89A12; --save:#3A7BD0;
   --display:"Fredoka","Avenir Next Rounded","Arial Rounded MT Bold",system-ui,sans-serif;
   --body:"Nunito","Avenir Next",system-ui,sans-serif;
   --hand:"Patrick Hand","Chalkboard SE","Comic Sans MS",cursive;
-  --bar:#A9532E; --bar-ink:#FFF6EA; --telha:#A9532E; --leaf:#3E7C4F; --leaf-ink:#FFFBF5; --dot:rgba(140,90,50,.07); --shadow:#E3D4BF;
+  --bar:#CC5A2C; --bar-ink:#FFFFFF; --telha:#C4552B; --leaf:#34A05C; --leaf2:#23824A; --leaf-ink:#FFFFFF; --dot:rgba(230,140,60,.10); --shadow:#F3DFC2;
+  --sol:#FFE7A8; --sol2:#FFF4D6;
 }
-@media (prefers-color-scheme: dark){:root{
-  --bg:#1E1712; --surface:#2A211A; --ink:#F2E6D6; --muted:#B39C86; --line:#3B2F26;
-  --accent:#7FBF8A; --accent-ink:#1E1712; --soft:#352A21;
-  --in:#83CC93; --out:#F08A6C; --warn:#E9B75C; --save:#93B2E2; --bar:#6E3820; --telha:#E39A6A; --leaf:#2D5A39; --leaf-ink:#F2E6D6; --dot:rgba(255,220,180,.035); --shadow:#15100C; color-scheme:dark}}
+/* Tema escuro: só quando escolhido em Ajustes (ou "igual ao iPhone") */
+:root[data-tema="escuro"]{
+  --bg:#241C17; --surface:#30261F; --ink:#F6EBDD; --muted:#C2AB95; --line:#43362C;
+  --accent:#6CC98A; --accent-ink:#1B1511; --soft:#3B3028;
+  --in:#7AD597; --out:#FF8F6E; --warn:#F5C15E; --save:#9BBCF0; --bar:#B5532A; --bar-ink:#FFF6EA; --telha:#F2A273; --leaf:#2F8A52; --leaf2:#226B3F; --leaf-ink:#FFFFFF; --dot:rgba(255,220,180,.04); --shadow:#17110D;
+  --sol:#FFE3A3; --sol2:#FFF1D2; color-scheme:dark}
+@media (prefers-color-scheme: dark){:root[data-tema="auto"]{
+  --bg:#241C17; --surface:#30261F; --ink:#F6EBDD; --muted:#C2AB95; --line:#43362C;
+  --accent:#6CC98A; --accent-ink:#1B1511; --soft:#3B3028;
+  --in:#7AD597; --out:#FF8F6E; --warn:#F5C15E; --save:#9BBCF0; --bar:#B5532A; --bar-ink:#FFF6EA; --telha:#F2A273; --leaf:#2F8A52; --leaf2:#226B3F; --leaf-ink:#FFFFFF; --dot:rgba(255,220,180,.04); --shadow:#17110D;
+  --sol:#FFE3A3; --sol2:#FFF1D2; color-scheme:dark}}
 *{box-sizing:border-box}
 body{background:var(--bg);background-image:radial-gradient(var(--dot) 1.2px,transparent 1.3px);background-size:16px 16px;color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.45;
   padding:0;min-height:100vh}
@@ -62,7 +71,7 @@ header.appbar .in{max-width:560px;margin:0 auto;display:flex;flex-direction:colu
 .note{font-size:.85rem;color:var(--muted);background:var(--surface);border:1px dashed var(--line);border-radius:12px;padding:10px 12px}
 .note.err{color:var(--out);border-color:var(--out)}
 
-.saldo{background:var(--leaf);background-image:linear-gradient(135deg,rgba(255,255,255,.08),transparent 60%);color:var(--leaf-ink);border-radius:22px;padding:18px 18px 16px;display:flex;flex-direction:column;gap:10px;box-shadow:0 3px 0 var(--shadow)}
+.saldo{background:var(--leaf);background-image:linear-gradient(135deg,var(--leaf),var(--leaf2));color:var(--leaf-ink);border-radius:22px;padding:18px 18px 16px;display:flex;flex-direction:column;gap:10px;box-shadow:0 3px 0 var(--shadow)}
 .saldo small{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;opacity:.85}
 .saldo .big{font-family:var(--display);font-weight:700;font-size:clamp(2.1rem,9vw,2.8rem);line-height:1;letter-spacing:0}
 .saldo .msg{font-weight:600;font-size:.92rem}
@@ -120,6 +129,12 @@ section.card.alerta{border-color:var(--warn);border-width:1.5px}
 .celebra .masc-art{max-width:240px;margin:0 auto;position:relative}
 .masc-art{background:none;border:0;padding:0;display:block;min-width:0}
 button.masc-art{cursor:pointer}
+.masc-art,.reac-art{background:radial-gradient(closest-side at 50% 58%,var(--sol) 0,var(--sol) 45%,var(--sol2) 72%,transparent 100%)!important}
+:root[data-tema="escuro"] .masc-art,:root[data-tema="escuro"] .reac-art{background:var(--sol2)!important;border-radius:18px;padding:4px!important}
+@media (prefers-color-scheme: dark){:root[data-tema="auto"] .masc-art,:root[data-tema="auto"] .reac-art{background:var(--sol2)!important;border-radius:18px;padding:4px!important}}
+.temas{display:grid;grid-template-columns:repeat(3,1fr);background:var(--bg);border-radius:12px;padding:4px;gap:4px}
+.temas button{border:0;background:none;border-radius:9px;padding:9px 4px;font-weight:700;color:var(--muted);font-size:.9rem}
+.temas button.on{background:var(--bar);color:var(--bar-ink)}
 @media (prefers-reduced-motion:no-preference){
  .vivo .ave{animation:bob 3.4s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 100%}
  .vivo g>g.ave{animation-delay:0s}
@@ -1582,6 +1597,9 @@ function telaAjustes(){
   <section class="card"><div class="hrow"><h2>Notificações neste iPhone</h2><span id="pushPill"></span></div>
     <div class="hint" id="pushTxt"></div>
     <button class="btn ghost" data-a="ativarPush" id="pushBtn" hidden>Ativar notificações</button></section>
+  <section class="card"><h2>Aparência</h2>
+    <div class="temas">${[["claro","☀️ Claro"],["escuro","🌙 Escuro"],["auto","📱 Automático"]].map(([v,t])=>`<button data-a="tema" data-v="${v}" class="${(document.documentElement.dataset.tema||"claro")===v?"on":""}">${t}</button>`).join("")}</div>
+    <div class="hint">Vale só para este iPhone e muda na hora. “Automático” segue o modo claro ou escuro do iPhone.</div></section>
   <section class="card"><h2>Exportar para Excel</h2>
     <div class="row"><button class="btn ghost" data-a="export" data-v="mes">${esc(ymNome(ymKey()))}</button><button class="btn ghost" data-a="export" data-v="ano">Ano de ${ym.y}</button></div>
     <div class="hint">No iPhone, escolha “Salvar em Arquivos” ou mande pelo WhatsApp/e-mail.</div></section>
@@ -1864,6 +1882,7 @@ document.addEventListener("click",ev=>{
   const a=t.dataset.a,id=t.dataset.id,val=t.dataset.v;
   if(S&&$("#sheet").contains(t))syncInputs();
   switch(a){
+    case "tema":ls.set("tema",val);document.documentElement.dataset.tema=val;render();break;
     case "tab":tab=val;casaView="fora";if(tab!=="ajustes")ls.set("tab",tab);render();window.scrollTo(0,0);break;
     case "mes":ym.m+=+val;if(ym.m<1){ym.m=12;ym.y--}if(ym.m>12){ym.m=1;ym.y++}mudouMes();render();break;
     case "novo":novoLanc();break;

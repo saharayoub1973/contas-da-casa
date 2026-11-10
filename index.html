@@ -473,8 +473,8 @@ function startData(){
   onSnapshot(query(col("dias"),where("d",">=",dAdd(hoje(),-370))),s=>{dias={};s.docs.forEach(d=>dias[d.id]=d.data());if(!s.metadata.fromCache)jr.dias=true;jogoTick()},snapErr);
   onSnapshot(col("meses"),s=>{meses={};s.docs.forEach(d=>meses[d.id]=d.data());if(!s.metadata.fromCache)jr.meses=true;jogoTick()},snapErr);
   onSnapshot(col("desafios"),s=>{desafios=docs(s).sort((a,b)=>(b.criadoEm||0)-(a.criadoEm||0));if(!s.metadata.fromCache)jr.desafios=true;jogoTick()},snapErr);
-  onSnapshot(col("jogo"),s=>{const m={};s.docs.forEach(d=>m[d.id]=d.data());conquistas=Object.assign({},m.conquistas||{});recordes=Object.assign({},m.recordes||{});dicasCfg={off:Object.assign({},(m.dicas||{}).off||{}),adiadas:Object.assign({},(m.dicas||{}).adiadas||{})};casa={itens:Object.assign({},(m.casa||{}).itens||{}),premiados:Object.assign({},(m.casa||{}).premiados||{})};reunioes=Object.assign({},m.reunioes||{});if(!s.metadata.fromCache)jr.jogo=true;jogoTick()},snapErr);
-  onSnapshot(query(col("lanc"),where("data",">=",dAdd(hoje(),-100))),s=>{lancsRec=docs(s);if(!s.metadata.fromCache)jr.rec=true;jogoTick()},snapErr);
+  onSnapshot(col("jogo"),s=>{const m={};s.docs.forEach(d=>m[d.id]=d.data());conquistas=Object.assign({},m.conquistas||{});recordes=Object.assign({},m.recordes||{});dicasCfg={off:Object.assign({},(m.dicas||{}).off||{}),adiadas:Object.assign({},(m.dicas||{}).adiadas||{})};casa={itens:Object.assign({},(m.casa||{}).itens||{}),premiados:Object.assign({},(m.casa||{}).premiados||{})};reunioes=Object.assign({},m.reunioes||{});jogoLido=true;if(!s.metadata.fromCache)jr.jogo=true;jogoTick()},snapErr);
+  onSnapshot(query(col("lanc"),where("data",">=",dAdd(hoje(),-100))),s=>{lancsRec=docs(s);recLido=true;if(!s.metadata.fromCache)jr.rec=true;jogoTick()},snapErr);
   onSnapshot(col("pagos"),s=>{pagos={};s.docs.forEach(d=>pagos[d.id]=d.data());pagosReady=pagosReady||!s.metadata.fromCache;autoGen();render()},snapErr);
   onSnapshot(col("faturas"),s=>{faturasPg={};s.docs.forEach(d=>faturasPg[d.id]=d.data());render()},snapErr);
   subAno();subFatura();
@@ -530,7 +530,7 @@ function listaPorDia(arr,comAno){let last="",h="";for(const l of sortDesc(arr)){
 
 /* ================= jogo: sequência, desafios, conquistas ================= */
 const dAdd=(ds,n)=>{const t=new Date(Date.UTC(+ds.slice(0,4),+ds.slice(5,7)-1,+ds.slice(8,10))+n*864e5);return t.getUTCFullYear()+"-"+pad(t.getUTCMonth()+1)+"-"+pad(t.getUTCDate())};
-let dias={},meses={},desafios=[],conquistas={},recordes={},lancsRec=[],lancsServer=false,reunioes={};
+let dias={},meses={},desafios=[],conquistas={},recordes={},lancsRec=[],lancsServer=false,reunioes={},jogoLido=false,recLido=false;
 const jr={dias:false,meses:false,desafios:false,jogo:false,rec:false,metas:false,lmeta:false};
 const jogoPronto=()=>Object.values(jr).every(Boolean)&&fixasReady;
 const celebrar=[];
@@ -1280,7 +1280,7 @@ function buscaSheetHtml(v){
 /* ================= reunião do mês ================= */
 const reuFeita=k=>!!(reunioes||{})[k];
 function temMesAnterior(){const pk=ymAdd(curYm(),-1);return todosLancs().some(l=>(l.data||"").slice(0,7)===pk)}
-function mostrarReuniao(){return jr.jogo&&jr.rec&&NOW().getDate()<=10&&!reuFeita(curYm())&&ls.get("reuDepois","")!==hoje()&&temMesAnterior()}
+function mostrarReuniao(){return jogoLido&&recLido&&NOW().getDate()<=10&&!reuFeita(curYm())&&ls.get("reuDepois","")!==hoje()&&temMesAnterior()}
 function reuniaoCardHtml(){
   const cur=curYm(),pk=ymAdd(cur,-1);
   return `<section class="card mascote"><span class="eyebrow">Reunião do mês</span>

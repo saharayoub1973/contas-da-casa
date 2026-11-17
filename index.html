@@ -956,6 +956,26 @@ function dicasHtml(){
   </section>`;
 }
 
+/* ================= registro de acesso ================= */
+function aparelhoTxt(){
+  const u=navigator.userAgent||"";let d="Computador";
+  if(/iPhone/.test(u))d="iPhone";else if(/iPad/.test(u)||(/Macintosh/.test(u)&&navigator.maxTouchPoints>1))d="iPad";else if(/Android/.test(u))d="Android";else if(/Macintosh/.test(u))d="Mac";else if(/Windows/.test(u))d="Windows";
+  const v=(u.match(/OS (\d+)[_.](\d+)/)||[]);if(v[1]&&/iPhone|iPad/.test(d))d+=" (iOS "+v[1]+"."+v[2]+")";
+  let n=/CriOS|Chrome\//.test(u)&&!/Edg/.test(u)?"Chrome":/Edg/.test(u)?"Edge":/Firefox|FxiOS/.test(u)?"Firefox":/Safari/.test(u)?"Safari":"navegador";
+  return d+" · "+(standalone()?"app da Tela de Início":n);
+}
+function registrarAcesso(tipo){
+  if(!fs||!window.__email)return;
+  const d=NOW(),body={quando:pad(d.getDate())+"/"+pad(d.getMonth()+1)+"/"+d.getFullYear()+" "+pad(d.getHours())+":"+pad(d.getMinutes()),email:emailEu(),tipo,aparelho:aparelhoTxt(),em:d.getTime()};
+  return setDoc(doc(fs,"acessos",newId("acessos")),body).catch(()=>{});
+}
+let ocultoEm=0;
+document.addEventListener("visibilitychange",()=>{
+  if(document.hidden){ocultoEm=Date.now();return}
+  if(started&&ocultoEm&&Date.now()-ocultoEm>=30*60*1000)registrarAcesso("voltou");
+  ocultoEm=0;
+});
+
 /* ================= quem lança ================= */
 function meuNome(){
   const em=(window.__email||"").toLowerCase(),lst=(CFG.emailsPermitidos||[]).map(x=>String(x).toLowerCase()),i=lst.indexOf(em);
@@ -2360,14 +2380,14 @@ else{
     const ok=!emailsPermitidos||!emailsPermitidos.length||emailsPermitidos.map(x=>x.toLowerCase()).includes((u.email||"").toLowerCase());
     if(!ok){signOut(auth);showErr("Este e-mail não está na lista de acesso.");return}
     window.__email=u.email;$("#login").hidden=true;
-    if(!started){started=true;setStatus("Carregando…");startData();if(temVapid()&&pushSuporte()&&Notification.permission==="granted")setTimeout(()=>registrarPush().catch(()=>{}),3000)}
+    if(!started){started=true;setStatus("Carregando…");startData();registrarAcesso(window.__entrouAgora?"entrou":"abriu");if(temVapid()&&pushSuporte()&&Notification.permission==="granted")setTimeout(()=>registrarPush().catch(()=>{}),3000)}
   });
   $("#loginForm").addEventListener("submit",async ev=>{ev.preventDefault();showErr("");
     const b=$("#lgBtn");b.disabled=true;b.textContent="Entrando…";
-    try{await signInWithEmailAndPassword(auth,$("#lgEmail").value.trim(),$("#lgSenha").value)}
+    try{window.__entrouAgora=true;await signInWithEmailAndPassword(auth,$("#lgEmail").value.trim(),$("#lgSenha").value)}
     catch(e){showErr(e.code==="auth/network-request-failed"?"Sem internet. O primeiro acesso precisa de conexão.":["auth/invalid-credential","auth/wrong-password","auth/user-not-found","auth/invalid-email"].includes(e.code)?"E-mail ou senha incorretos.":"Não foi possível entrar ("+e.code+").")}
     b.disabled=false;b.textContent="Entrar"});
-  window.__logout=()=>{signOut(auth).then(()=>location.reload())};
+  window.__logout=async()=>{try{await Promise.race([registrarAcesso("saiu"),new Promise(r=>setTimeout(r,1500))])}catch(e){}signOut(auth).then(()=>location.reload())};
 }
 if("serviceWorker" in navigator)navigator.serviceWorker.register("./sw.js").catch(()=>{});
 </script>
